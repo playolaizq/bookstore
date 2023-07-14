@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form';
+import { getLocalStorageItem, setLocalStorageItem } from '#/common/utils/local-storage';
 import Button from '#/common/components/button/Button';
 import Drawer from '#/common/components/drawer/Drawer';
 import Input from '#/common/components/input/Input';
@@ -15,13 +16,21 @@ type ManageBookDrawerProps = {
 };
 
 function ManageBookDrawer({ visible, bookId, onSubmit, onClose }: ManageBookDrawerProps) {
-  const { register, handleSubmit } = useForm({ defaultValues });
+  const { register, handleSubmit, setValue } = useForm({ defaultValues });
 
-  const handleFormSubmit = (values: Book) => {
-    console.log('values', values);
-    if (onSubmit) {
-      onSubmit(values);
-    }
+  // Manually set the value of Select due to Ant Design incompatibility with React Hook Form.
+  const handleSelectChange = (value: Book['category']) => {
+    setValue('category', value);
+  };
+
+  const handleFormSubmit = (newBook: Book) => {
+    const books = getLocalStorageItem<Book[]>('books', []);
+    const newBooks = [...books, newBook];
+
+    setLocalStorageItem('books', newBooks);
+
+    if (onSubmit) onSubmit(newBook);
+    if (onClose) onClose();
   };
 
   return (
@@ -48,7 +57,7 @@ function ManageBookDrawer({ visible, bookId, onSubmit, onClose }: ManageBookDraw
         <div className={classes.formItem}>
           <label className={classes.formLabel}>Category</label>
           <Select
-            {...register('category', { required: true })}
+            onChange={handleSelectChange}
             placeholder="Select a category"
             options={[
               { value: 'mystery', label: 'Mystery' },

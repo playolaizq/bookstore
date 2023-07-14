@@ -1,6 +1,8 @@
-export const defaultValues = {
+import { Book } from '../../../BooksList';
+
+export const defaultValues: Book = {
   name: '',
   author: '',
   description: '',
-  category: null,
+  category: 'programming',
 };

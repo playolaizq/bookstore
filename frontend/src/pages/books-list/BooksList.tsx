@@ -6,7 +6,7 @@ export type Book = {
   name: string;
   author: string;
   description?: string;
-  category: 'thriller' | 'fiction' | 'mystery' | null;
+  category: 'programming' | 'thriller' | 'fiction' | 'mystery';
 };
 
 function BooksList() {

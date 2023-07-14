@@ -53,3 +53,4 @@ npm run test-coverage
 ## Improvements
 
 - Ant Design classes overrides: Avoid using global - Investigate how to properly override Ant Design classes using CSS modules.
+- Manually set the value of Select due to Ant Design incompatibility with React Hook Form.
