@@ -1,0 +1,5 @@
+.container {
+  background-color: var(--bookstore-color-white);
+  color: var(--bookstore-color-black);
+  border: 1px solid var(--bookstore-color-neutral-darken1);
+}

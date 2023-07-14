@@ -1,0 +1,30 @@
+.root {
+  height: calc(100vh - 48px);
+  padding: 24px 224px;
+  background-color: var(--bookstore-color-layout-bg);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.titleContainer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logo {
+  width: 48px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.content {
+  padding: 24px 0;
+}
