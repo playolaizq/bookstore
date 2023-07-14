@@ -5,22 +5,29 @@ import Drawer from '#/common/components/drawer/Drawer';
 import Input from '#/common/components/input/Input';
 import Select from '#/common/components/select/Select';
 import { Book } from '../../BooksList';
-import { defaultValues } from './config/form';
+import { DEFAULT_VALUES } from './config/form';
 import classes from './ManageBookDrawer.module.css';
+import { useEffect } from 'react';
 
 type ManageBookDrawerProps = {
   visible: boolean;
-  bookId?: string;
+  bookId?: Book['id'] | null;
+  defaultValues?: Book | null;
   onSubmit?: (book: Book) => void;
   onClose?: () => void;
 };
 
-function ManageBookDrawer({ visible, bookId, onSubmit, onClose }: ManageBookDrawerProps) {
-  const { register, handleSubmit, setValue } = useForm({ defaultValues });
+function ManageBookDrawer({ visible, bookId, defaultValues, onSubmit, onClose }: ManageBookDrawerProps) {
+  const { handleSubmit, register, reset, setValue } = useForm({ defaultValues: DEFAULT_VALUES });
 
   // Manually set the value of Select due to Ant Design incompatibility with React Hook Form.
   const handleSelectChange = (value: Book['category']) => {
     setValue('category', value);
+  };
+
+  const handleClose = () => {
+    if (onClose) onClose();
+    reset(DEFAULT_VALUES);
   };
 
   const handleFormSubmit = (newBook: Book) => {
@@ -30,11 +37,20 @@ function ManageBookDrawer({ visible, bookId, onSubmit, onClose }: ManageBookDraw
     setLocalStorageItem('books', newBooks);
 
     if (onSubmit) onSubmit(newBook);
-    if (onClose) onClose();
+    handleClose();
   };
 
+  useEffect(() => {
+    if (defaultValues) {
+      reset(defaultValues)
+
+      // TODO: Properly set category initial value
+      handleSelectChange(defaultValues.category);
+    }
+  }, [defaultValues]);
+
   return (
-    <Drawer open={visible} title={bookId ? 'Update book' : 'Add book'} onClose={onClose}>
+    <Drawer open={visible} title={bookId ? 'Update book' : 'Add book'} onClose={handleClose}>
       <form
         className={classes.form}
         onSubmit={(...args) => void handleSubmit(handleFormSubmit)(...args)}
@@ -59,6 +75,7 @@ function ManageBookDrawer({ visible, bookId, onSubmit, onClose }: ManageBookDraw
           <Select
             onChange={handleSelectChange}
             placeholder="Select a category"
+            defaultValue="programming"
             options={[
               { value: 'programming', label: 'Programming' },
               { value: 'mystery', label: 'Mystery' },
@@ -69,8 +86,8 @@ function ManageBookDrawer({ visible, bookId, onSubmit, onClose }: ManageBookDraw
         </div>
 
         <footer className={classes.formFooter}>
-          <Button type="submit">Add book</Button>
-          <Button variant="secondary" onClick={onClose}>
+          <Button type="submit">{bookId ? 'Update book' : 'Add book'}</Button>
+          <Button variant="secondary" onClick={handleClose}>
             Cancel
           </Button>
         </footer>
