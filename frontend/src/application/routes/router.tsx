@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
-import AuthLayout from '#/application/components/auth-layout/AuthLayout';
-import Layout from '#/application/components/layout/Layout';
+import PrivateLayout from '#/application/components/private-layout/PrivateLayout';
+import PublicLayout from '#/application/components/public-layout/PublicLayout';
 import BooksList from '#/pages/books-list/BooksList';
 import SignIn from '#/pages/sign-in/SignIn';
 import SignUp from '#/pages/sign-up/SignUp';
@@ -10,7 +10,7 @@ import { paths } from './paths';
 export const router = createBrowserRouter([
   {
     path: paths.BASE,
-    element: <Layout />,
+    element: <PrivateLayout />,
     errorElement: <UnexpectedError />,
     children: [
       {
@@ -22,7 +22,7 @@ export const router = createBrowserRouter([
         element: <BooksList />,
       },
       {
-        element: <AuthLayout />,
+        element: <PublicLayout />,
         children: [
           {
             path: paths.SIGN_IN,
