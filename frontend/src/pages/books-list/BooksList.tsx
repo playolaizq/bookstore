@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import EmptyState from './components/empty-state/EmptyState';
 import ManageBookDrawer from './components/manage-book-drawer/ManageBookDrawer';
-import classes from './BooksList.module.css';
 
-type Book = {
+export type Book = {
   name: string;
   author: string;
   description?: string;
-  category: 'thriller' | 'fiction' | 'mystery';
+  category: 'thriller' | 'fiction' | 'mystery' | null;
 };
 
 function BooksList() {

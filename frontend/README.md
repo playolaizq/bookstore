@@ -43,3 +43,13 @@ npm run test-watch
 ```bash
 npm run test-coverage
 ```
+
+## Troubleshooting
+
+- React Hook Form issue with form `handleSubmit` TypeScript.
+  - Workaround: `<form onSubmit={(...args) => void handleSubmit(onSubmit)(...args)}>`
+  - [GitHub Issue](https://github.com/orgs/react-hook-form/discussions/8020#discussioncomment-3362300)
+
+## Improvements
+
+- Ant Design classes overrides: Avoid using global - Investigate how to properly override Ant Design classes using CSS modules.

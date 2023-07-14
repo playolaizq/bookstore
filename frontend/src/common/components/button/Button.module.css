@@ -17,3 +17,20 @@
   outline: 2px solid var(--bookstore-color-primary-darken1);
   background: var(--bookstore-color-primary-darken1);
 }
+
+.secondaryVariant {
+  background: var(--bookstore-color-white);
+  color: var(--bookstore-color-black);
+  border: 1px solid var(--bookstore-color-black);
+}
+
+.secondaryVariant:hover {
+  border-color: var(--bookstore-color-neutral-lighten3);
+  background: var(--bookstore-color-neutral-lighten3);
+}
+
+.secondaryVariant:active {
+  border-color: var(--bookstore-color-neutral-lighten2);
+  outline: 2px solid var(--bookstore-color-neutral-lighten2);
+  background: var(--bookstore-color-neutral-lighten2);
+}
