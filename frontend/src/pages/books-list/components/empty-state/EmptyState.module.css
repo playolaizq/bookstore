@@ -1,0 +1,18 @@
+.container {
+  margin: 32px;
+  text-align: center;
+}
+
+.image {
+  width: 250px;
+  margin-bottom: 24px;
+}
+
+.description {
+  color: var(--bookstore-color-neutral-darken2);
+  margin: 0;
+}
+
+.button {
+  margin-top: 24px;
+}
