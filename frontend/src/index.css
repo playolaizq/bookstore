@@ -1,23 +1,23 @@
 :root {
-  --bookstore-color-primary-lighten3: #F3D295;
-  --bookstore-color-primary-lighten2: #EFC16C;
-  --bookstore-color-primary-lighten1: #EAB043;
-  --bookstore-color-primary-base: #E69E19;
-  --bookstore-color-primary-darken1: #BC8215;
+  --bookstore-color-primary-lighten3: #f3d295;
+  --bookstore-color-primary-lighten2: #efc16c;
+  --bookstore-color-primary-lighten1: #eab043;
+  --bookstore-color-primary-base: #e69e19;
+  --bookstore-color-primary-darken1: #bc8215;
   --bookstore-color-primary-darken2: #936510;
-  --bookstore-color-primary-darken3: #6A490C;
+  --bookstore-color-primary-darken3: #6a490c;
 
-  --bookstore-color-neutral-lighten3: #E6E6E6;
-  --bookstore-color-neutral-lighten2: #C4C4C4;
-  --bookstore-color-neutral-lighten1: #ADADAD;
+  --bookstore-color-neutral-lighten3: #e6e6e6;
+  --bookstore-color-neutral-lighten2: #c4c4c4;
+  --bookstore-color-neutral-lighten1: #adadad;
   --bookstore-color-neutral-base: #808080;
   --bookstore-color-neutral-darken1: #696969;
   --bookstore-color-neutral-darken2: #525252;
-  --bookstore-color-neutral-darken3: #3B3B3B;
+  --bookstore-color-neutral-darken3: #3b3b3b;
 
-  --bookstore-color-white: #FFFFFF;
+  --bookstore-color-white: #ffffff;
   --bookstore-color-black: #000000;
-  --bookstore-color-layout-bg: #F8F4F1;
+  --bookstore-color-layout-bg: #f8f4f1;
 
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

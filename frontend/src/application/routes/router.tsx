@@ -10,7 +10,6 @@ import { paths } from './paths';
 export const router = createBrowserRouter([
   {
     path: paths.BASE,
-    element: <PrivateLayout />,
     errorElement: <UnexpectedError />,
     children: [
       {
@@ -18,8 +17,13 @@ export const router = createBrowserRouter([
         element: <Navigate to={paths.BOOKS_LIST} replace={true} />,
       },
       {
-        path: paths.BOOKS_LIST,
-        element: <BooksList />,
+        element: <PrivateLayout />,
+        children: [
+          {
+            path: paths.BOOKS_LIST,
+            element: <BooksList />,
+          },
+        ],
       },
       {
         element: <PublicLayout />,
