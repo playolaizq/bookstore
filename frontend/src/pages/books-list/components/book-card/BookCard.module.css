@@ -1,0 +1,42 @@
+.container {
+  display: block;
+  max-height: 250px;
+  background: var(--bookstore-color-white);
+  padding: 16px;
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+.container:hover {
+  transform: scale(1.05);
+  transition: all 0.1s ease-in-out;
+}
+
+.name {
+  font-size: 24px;
+  margin: 0;
+}
+
+.author {
+  font-size: 14px;
+  margin: 0;
+  color: var(--bookstore-color-neutral-darken1);
+  font-style: italic;
+}
+
+.description {
+  -webkit-line-clamp: 3; /* Chrome */
+  -moz-line-clamp: 3; /* Firefox */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 3em;
+  font-size: 16px;
+}
+
+.category {
+  width: fit-content;
+  padding: 4px 8px;
+  border-radius: 16px;
+  background-color: var(--bookstore-color-primary-base);
+  color: var(--bookstore-color-white);
+}

@@ -1,7 +1,14 @@
 .root {
-  height: calc(100vh - 48px);
-  padding: 24px 224px;
+  min-height: 100vh;
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 24px 32px;
   background-color: var(--bookstore-color-layout-bg);
+}
+
+.innerRoot {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .header {
@@ -27,4 +34,16 @@
 
 .content {
   padding: 24px 0;
+}
+
+@media (min-width: 480px) {
+  .root {
+    padding: 24px 64px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .root {
+    padding: 24px 124px;
+  }
 }

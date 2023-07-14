@@ -1,6 +1,6 @@
 import { Book } from '../../../BooksList';
 
-export const defaultValues: Book = {
+export const DEFAULT_VALUES: Book = {
   id: '',
   name: '',
   author: '',
