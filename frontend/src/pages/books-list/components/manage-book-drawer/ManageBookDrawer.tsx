@@ -25,7 +25,7 @@ function ManageBookDrawer({ visible, bookId, onSubmit, onClose }: ManageBookDraw
 
   const handleFormSubmit = (newBook: Book) => {
     const books = getLocalStorageItem<Book[]>('books', []);
-    const newBooks = [...books, newBook];
+    const newBooks = [...books, { ...newBook, id: crypto.randomUUID() }];
 
     setLocalStorageItem('books', newBooks);
 
@@ -60,6 +60,7 @@ function ManageBookDrawer({ visible, bookId, onSubmit, onClose }: ManageBookDraw
             onChange={handleSelectChange}
             placeholder="Select a category"
             options={[
+              { value: 'programming', label: 'Programming' },
               { value: 'mystery', label: 'Mystery' },
               { value: 'fiction', label: 'Fiction' },
               { value: 'thriller', label: 'Thriller' },
