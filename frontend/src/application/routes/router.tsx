@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import AuthLayout from '#/application/components/auth-layout/AuthLayout';
 import Layout from '#/application/components/layout/Layout';
 import BooksList from '#/pages/books-list/BooksList';
@@ -13,6 +13,10 @@ export const router = createBrowserRouter([
     element: <Layout />,
     errorElement: <UnexpectedError />,
     children: [
+      {
+        path: paths.BASE,
+        element: <Navigate to={paths.BOOKS_LIST} replace={true} />,
+      },
       {
         path: paths.BOOKS_LIST,
         element: <BooksList />,
