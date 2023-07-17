@@ -53,7 +53,7 @@ jobs:
       - name: 🔧 Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          path: "./dist"
+          path: "./frontend/dist"
       - name: 🎉 Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
