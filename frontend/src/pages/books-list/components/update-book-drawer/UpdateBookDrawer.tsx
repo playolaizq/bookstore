@@ -1,12 +1,15 @@
-import { updateBook } from '#/common/services/books';
+import { DeleteOutlined } from '@ant-design/icons';
+import { updateBook, deleteBook } from '#/common/services/books';
+import Button from '#/common/components/button/Button';
 import Drawer from '#/common/components/drawer/Drawer';
+import Popconfirm from '#/common/components/popconfirm/Popconfirm';
 import { Book } from '#/common/types/book';
 import BookForm from '../book-form/BookForm';
 
 type UpdateBookDrawerProps = {
   visible: boolean;
   defaultValues?: Book | null;
-  onFinish: (book: Book) => void;
+  onFinish: () => void;
   onClose?: () => void;
 };
 
@@ -18,20 +21,45 @@ function UpdateBookDrawer({ visible, defaultValues, onFinish, onClose }: UpdateB
   const handleSubmit = (updatedBook: Book) => {
     if (defaultValues) {
       updateBook(defaultValues.id, updatedBook);
-      // TODO: Update book in the database (async).
     }
 
-    onFinish(updatedBook);
+    onFinish();
+    handleClose();
+  };
+
+  const handleDelete = () => {
+    if (defaultValues) {
+      deleteBook(defaultValues.id);
+    }
+
+    onFinish();
     handleClose();
   };
 
   return (
-    <Drawer open={visible} title="Update book" onClose={handleClose}>
+    <Drawer
+      open={visible}
+      title="Update book"
+      onClose={handleClose}
+      extra={
+        <Popconfirm
+          title="Delete the book"
+          description="Are you sure to delete this book?"
+          onConfirm={handleDelete}
+          okText="Yes"
+          cancelText="No"
+        >
+          <Button variant="secondary" shape="circle">
+            <DeleteOutlined />
+          </Button>
+        </Popconfirm>
+      }
+    >
       <BookForm
         defaultValues={defaultValues}
         onSubmit={handleSubmit}
         onClose={handleClose}
-        submitText="Update book"
+        submitText="Update"
       />
     </Drawer>
   );

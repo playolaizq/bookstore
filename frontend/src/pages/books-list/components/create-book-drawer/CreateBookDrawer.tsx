@@ -16,15 +16,13 @@ function CreateBookDrawer({ visible, onFinish, onClose }: CreateBookDrawerProps)
 
   const handleSubmit = (book: Book) => {
     const newBook = createBook(book);
-    // TODO: Create book in the database (async).
-
     onFinish(newBook);
     handleClose();
   };
 
   return (
     <Drawer open={visible} title="Add book" onClose={handleClose}>
-      <BookForm onSubmit={handleSubmit} onClose={handleClose} submitText="Add book" />
+      <BookForm onSubmit={handleSubmit} onClose={handleClose} submitText="Add" />
     </Drawer>
   );
 }

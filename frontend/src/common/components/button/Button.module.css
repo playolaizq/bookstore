@@ -34,3 +34,10 @@
   outline: 2px solid var(--bookstore-color-neutral-lighten2);
   background: var(--bookstore-color-neutral-lighten2);
 }
+
+.circleShape {
+  font-size: 14px;
+  padding: 8px;
+  width: 32px;
+  height: 32px;
+}
