@@ -1,9 +1,63 @@
 {
+  "application": {
+    "locale": {
+      "en": "English",
+      "es": "Spanish"
+    },
+    "title": "Bookstore"
+  },
   "common": {
     "actions": {
       "add": "Add",
       "cancel": "Cancel",
-      "update": "Update"
+      "no": "No",
+      "update": "Update",
+      "yes": "Yes"
+    },
+    "book": {
+      "category": {
+        "fiction": "Fiction",
+        "mystery": "Mistery",
+        "programming": "Programming",
+        "thriller": "Thriller"
+      }
+    }
+  },
+  "pages": {
+    "books-list": {
+      "add-action": "Add book",
+      "book-form": {
+        "labels": {
+          "author": "Author",
+          "category": "Category",
+          "description": "Description",
+          "name": "Name"
+        },
+        "placeholders": {
+          "author": "Type book auhor",
+          "category": "Select a category",
+          "description": "What's the book about?",
+          "name": "Type book name"
+        }
+      },
+      "create-book-drawer": {
+        "title": "Add book"
+      },
+      "empty-state": {
+        "description": "Add your first book!",
+        "title": "Looking for a read?"
+      },
+      "update-book-drawer": {
+        "delete-confirmation-description": "Are you sure to delete this book?",
+        "delete-confirmation-title": "Delete the book",
+        "title": "Update book"
+      }
+    },
+    "sign-in": {
+      "title": "Sign In"
+    },
+    "sign-up": {
+      "title": "Sign Up"
     }
   }
 }

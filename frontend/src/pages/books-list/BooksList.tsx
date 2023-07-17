@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useI18n } from '#/common/hooks/i18n';
 import { getBooks } from '#/common/services/books';
 import Button from '#/common/components/button/Button';
 import Skeleton from '#/common/components/skeleton/Skeleton';
@@ -12,6 +13,7 @@ import { skeletonButtonStyle, skeletonCardStyle } from './config/loading';
 import classes from './BooksList.module.css';
 
 function BooksList() {
+  const { t } = useI18n();
   const [books, setBooks] = useState<Book[]>([]);
   const [createBook, setCreateBookDrawer] = useState({ visible: false });
   const [updateBook, setUpdateBookDrawer] = useState<{
@@ -72,7 +74,7 @@ function BooksList() {
       ) : (
         <section>
           <header className={classes.header}>
-            <Button onClick={() => handleBookDrawer()}>Add book</Button>
+            <Button onClick={() => handleBookDrawer()}>{t('pages.books-list.add-action')}</Button>
           </header>
           <ul className={classes.gridList}>
             {books.map((book) => {

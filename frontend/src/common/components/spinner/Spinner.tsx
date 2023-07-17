@@ -1,7 +1,3 @@
-import { Spin, SpinProps } from 'antd';
+import { Spin } from 'antd';
 
-function Spinner(props: SpinProps) {
-  return <Spin {...props} />;
-}
-
-export default Spinner;
+export default Spin;

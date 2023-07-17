@@ -9,17 +9,15 @@ export const locale = {
 };
 
 export function configureI18n() {
-  i18n
-    .use(initReactI18next)
-    .init({
-      resources: {
-        [locale.EN]: { translation: translationEN },
-        [locale.ES]: { translation: translationES },
-      },
-      lng: locale.EN,
-      fallbackLng: locale.EN,
-      interpolation: {
-        escapeValue: false, // https://www.i18next.com/translation-function/interpolation#unescape
-      },
-    });
+  i18n.use(initReactI18next).init({
+    resources: {
+      [locale.EN]: { translation: translationEN },
+      [locale.ES]: { translation: translationES },
+    },
+    lng: locale.EN,
+    fallbackLng: locale.EN,
+    interpolation: {
+      escapeValue: false, // https://www.i18next.com/translation-function/interpolation#unescape
+    },
+  });
 }

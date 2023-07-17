@@ -1,9 +1,63 @@
 {
+  "application": {
+    "locale": {
+      "en": "Inglés",
+      "es": "Español"
+    },
+    "title": "Bookstore"
+  },
   "common": {
     "actions": {
       "add": "Añadir",
       "cancel": "Cancelar",
-      "update": "Actualizar"
+      "no": "No",
+      "update": "Actualizar",
+      "yes": "Sí"
+    },
+    "book": {
+      "category": {
+        "fiction": "Ficción",
+        "mystery": "Misterio",
+        "programming": "Programación",
+        "thriller": "Thriller"
+      }
+    }
+  },
+  "pages": {
+    "books-list": {
+      "add-action": "Añadir libro",
+      "book-form": {
+        "labels": {
+          "author": "Autor",
+          "category": "Categoria",
+          "description": "Descripción",
+          "name": "Nombre"
+        },
+        "placeholders": {
+          "author": "Escribe el autor",
+          "category": "Selecciona una categoria",
+          "description": "¿De qué trata el libro?",
+          "name": "Escribe el nombre"
+        }
+      },
+      "create-book-drawer": {
+        "title": "Añadir libro"
+      },
+      "empty-state": {
+        "description": "¡Añade tu primer libro!",
+        "title": "¿Buscas una lectura?"
+      },
+      "update-book-drawer": {
+        "delete-confirmation-description": "¿Estás seguro de borrar este libro?",
+        "delete-confirmation-title": "Borrar el libro",
+        "title": "Actualizar libro"
+      }
+    },
+    "sign-in": {
+      "title": "Inicio de sesión"
+    },
+    "sign-up": {
+      "title": "Registro"
     }
   }
 }

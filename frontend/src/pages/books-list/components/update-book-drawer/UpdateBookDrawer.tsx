@@ -42,15 +42,15 @@ function UpdateBookDrawer({ visible, defaultValues, onFinish, onClose }: UpdateB
   return (
     <Drawer
       open={visible}
-      title="Update book"
+      title={t('pages.books-list.update-book-drawer.title')}
       onClose={handleClose}
       extra={
         <PopConfirm
-          title="Delete the book"
-          description="Are you sure to delete this book?"
+          title={t('pages.books-list.update-book-drawer.delete-confirmation-title')}
+          description={t('pages.books-list.update-book-drawer.delete-confirmation-description')}
           onConfirm={handleDelete}
-          okText="Yes"
-          cancelText="No"
+          okText={t('common.actions.yes')}
+          cancelText={t('common.actions.no')}
         >
           <Button variant="secondary" shape="circle">
             <DeleteOutlined />

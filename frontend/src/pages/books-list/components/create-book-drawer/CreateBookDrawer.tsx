@@ -24,7 +24,11 @@ function CreateBookDrawer({ visible, onFinish, onClose }: CreateBookDrawerProps)
   };
 
   return (
-    <Drawer open={visible} title="Add book" onClose={handleClose}>
+    <Drawer
+      open={visible}
+      title={t('pages.books-list.create-book-drawer.title')}
+      onClose={handleClose}
+    >
       <BookForm
         onSubmit={handleSubmit}
         onClose={handleClose}
