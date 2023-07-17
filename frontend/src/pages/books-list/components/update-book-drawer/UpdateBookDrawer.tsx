@@ -49,6 +49,7 @@ function UpdateBookDrawer({ visible, defaultValues, onFinish, onClose }: UpdateB
           title={t('pages.books-list.update-book-drawer.delete-confirmation-title')}
           description={t('pages.books-list.update-book-drawer.delete-confirmation-description')}
           onConfirm={handleDelete}
+          okType="danger"
           okText={t('common.actions.yes')}
           cancelText={t('common.actions.no')}
         >
