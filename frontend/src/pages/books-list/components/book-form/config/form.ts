@@ -1,4 +1,4 @@
-import { Book } from '../../../BooksList';
+import { Book } from '#/common/types/book';
 
 export const DEFAULT_VALUES: Book = {
   id: '',

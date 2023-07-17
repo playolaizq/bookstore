@@ -1,4 +1,4 @@
-import { Book } from '../../BooksList';
+import { Book } from '#/common/types/book';
 import classes from './BookCard.module.css';
 
 type BookCardProps = {
