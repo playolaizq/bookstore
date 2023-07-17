@@ -5,7 +5,7 @@
 ```bash
 git clone git@github.com:playolaizq/bookstore.git
 
-cd bookstore/bookstore-frontend
+cd bookstore/frontend
 
 npm install
 
