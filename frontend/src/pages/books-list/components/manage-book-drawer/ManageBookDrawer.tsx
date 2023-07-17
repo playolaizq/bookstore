@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { getLocalStorageItem, setLocalStorageItem } from '#/common/utils/local-storage';
 import Button from '#/common/components/button/Button';
 import Drawer from '#/common/components/drawer/Drawer';
@@ -17,13 +17,16 @@ type ManageBookDrawerProps = {
   onClose?: () => void;
 };
 
-function ManageBookDrawer({ visible, bookId, defaultValues, onSubmit, onClose }: ManageBookDrawerProps) {
-  const { handleSubmit, register, reset, setValue } = useForm({ defaultValues: DEFAULT_VALUES });
-
-  // Manually set the value of Select due to Ant Design incompatibility with React Hook Form.
-  const handleSelectChange = (value: Book['category']) => {
-    setValue('category', value);
-  };
+function ManageBookDrawer({
+  visible,
+  bookId,
+  defaultValues,
+  onSubmit,
+  onClose,
+}: ManageBookDrawerProps) {
+  const { control, handleSubmit, register, reset } = useForm({
+    defaultValues: DEFAULT_VALUES,
+  });
 
   const handleClose = () => {
     if (onClose) onClose();
@@ -42,10 +45,7 @@ function ManageBookDrawer({ visible, bookId, defaultValues, onSubmit, onClose }:
 
   useEffect(() => {
     if (defaultValues) {
-      reset(defaultValues)
-
-      // TODO: Properly set category initial value
-      handleSelectChange(defaultValues.category);
+      reset(defaultValues);
     }
   }, [defaultValues]);
 
@@ -72,16 +72,26 @@ function ManageBookDrawer({ visible, bookId, defaultValues, onSubmit, onClose }:
 
         <div className={classes.formItem}>
           <label className={classes.formLabel}>Category</label>
-          <Select
-            onChange={handleSelectChange}
-            placeholder="Select a category"
-            defaultValue="programming"
-            options={[
-              { value: 'programming', label: 'Programming' },
-              { value: 'mystery', label: 'Mystery' },
-              { value: 'fiction', label: 'Fiction' },
-              { value: 'thriller', label: 'Thriller' },
-            ]}
+          <Controller
+            control={control}
+            name="category"
+            render={({ field: { onChange, onBlur, value } }) => {
+              return (
+                <Select
+                  placeholder="Select a category"
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  options={[
+                    { value: 'programming', label: 'Programming' },
+                    { value: 'mystery', label: 'Mystery' },
+                    { value: 'fiction', label: 'Fiction' },
+                    { value: 'thriller', label: 'Thriller' },
+                  ]}
+                  value={value}
+                />
+              );
+            }}
+            rules={{ required: true }}
           />
         </div>
 
