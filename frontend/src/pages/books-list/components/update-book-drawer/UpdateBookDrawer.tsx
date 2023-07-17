@@ -1,8 +1,9 @@
 import { DeleteOutlined } from '@ant-design/icons';
+import { useI18n } from '#/common/hooks/i18n';
 import { updateBook, deleteBook } from '#/common/services/books';
 import Button from '#/common/components/button/Button';
 import Drawer from '#/common/components/drawer/Drawer';
-import Popconfirm from '#/common/components/popconfirm/Popconfirm';
+import PopConfirm from '#/common/components/pop-confirm/PopConfirm';
 import { Book } from '#/common/types/book';
 import BookForm from '../book-form/BookForm';
 
@@ -14,6 +15,8 @@ type UpdateBookDrawerProps = {
 };
 
 function UpdateBookDrawer({ visible, defaultValues, onFinish, onClose }: UpdateBookDrawerProps) {
+  const { t } = useI18n();
+
   const handleClose = () => {
     if (onClose) onClose();
   };
@@ -39,27 +42,28 @@ function UpdateBookDrawer({ visible, defaultValues, onFinish, onClose }: UpdateB
   return (
     <Drawer
       open={visible}
-      title="Update book"
+      title={t('pages.books-list.update-book-drawer.title')}
       onClose={handleClose}
       extra={
-        <Popconfirm
-          title="Delete the book"
-          description="Are you sure to delete this book?"
+        <PopConfirm
+          title={t('pages.books-list.update-book-drawer.delete-confirmation-title')}
+          description={t('pages.books-list.update-book-drawer.delete-confirmation-description')}
           onConfirm={handleDelete}
-          okText="Yes"
-          cancelText="No"
+          okType="danger"
+          okText={t('common.actions.yes')}
+          cancelText={t('common.actions.no')}
         >
           <Button variant="secondary" shape="circle">
             <DeleteOutlined />
           </Button>
-        </Popconfirm>
+        </PopConfirm>
       }
     >
       <BookForm
         defaultValues={defaultValues}
         onSubmit={handleSubmit}
         onClose={handleClose}
-        submitText="Update"
+        submitText={t('common.actions.update')}
       />
     </Drawer>
   );

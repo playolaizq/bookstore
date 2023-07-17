@@ -1,6 +1,5 @@
 .container {
   width: -webkit-fill-available;
-  background-color: var(--bookstore-color-white);
   color: var(--bookstore-color-black);
 }
 
@@ -10,6 +9,7 @@
   border: 1px solid var(--bookstore-color-neutral-base) !important;
   border-radius: 100px !important;
   padding: 1px 16px !important;
+  background-color: var(--bookstore-color-white);
 }
 
 :global(.ant-select-selector:hover) {

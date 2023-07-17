@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { useI18n } from '#/common/hooks/i18n';
 import Button from '#/common/components/button/Button';
 import Input from '#/common/components/input/Input';
 import Select from '#/common/components/select/Select';
@@ -16,6 +17,7 @@ type BookFormProps = {
 };
 
 function BookForm({ defaultValues, onSubmit, onClose, submitText, cancelText }: BookFormProps) {
+  const { t } = useI18n();
   const { control, handleSubmit, register, reset } = useForm({
     defaultValues: DEFAULT_VALUES,
   });
@@ -42,36 +44,52 @@ function BookForm({ defaultValues, onSubmit, onClose, submitText, cancelText }: 
       onSubmit={(...args) => void handleSubmit(handleFormSubmit)(...args)}
     >
       <div className={classes.formItem}>
-        <label className={classes.formLabel}>Name</label>
-        <Input {...register('name', { required: true })} placeholder="Type book name" />
+        <label className={classes.formLabel}>{t('pages.books-list.book-form.labels.name')}</label>
+        <Input
+          {...register('name', { required: true })}
+          placeholder={t('pages.books-list.book-form.placeholders.name')}
+        />
       </div>
 
       <div className={classes.formItem}>
-        <label className={classes.formLabel}>Author</label>
-        <Input {...register('author', { required: true })} placeholder="Type book author" />
+        <label className={classes.formLabel}>{t('pages.books-list.book-form.labels.author')}</label>
+        <Input
+          {...register('author', { required: true })}
+          placeholder={t('pages.books-list.book-form.placeholders.author')}
+        />
       </div>
 
       <div className={classes.formItem}>
-        <label className={classes.formLabel}>Description</label>
-        <Input {...register('description')} placeholder="What's the book about?" />
+        <label className={classes.formLabel}>
+          {t('pages.books-list.book-form.labels.description')}
+        </label>
+        <Input
+          {...register('description')}
+          placeholder={t('pages.books-list.book-form.placeholders.description')}
+        />
       </div>
 
       <div className={classes.formItem}>
-        <label className={classes.formLabel}>Category</label>
+        <label className={classes.formLabel}>
+          {t('pages.books-list.book-form.labels.category')}
+        </label>
         <Controller
           control={control}
           name="category"
           render={({ field: { onChange, onBlur, value } }) => {
             return (
               <Select
-                placeholder="Select a category"
+                placeholder={t('pages.books-list.book-form.placeholders.category')}
                 onChange={onChange}
                 onBlur={onBlur}
                 options={[
-                  { value: 'programming', label: 'Programming' },
-                  { value: 'mystery', label: 'Mystery' },
-                  { value: 'fiction', label: 'Fiction' },
-                  { value: 'thriller', label: 'Thriller' },
+                  {
+                    value: 'programming',
+                    label: t('common.book.category.programming'),
+                  },
+                  { value: 'mystery', label: t('common.book.category.mystery') },
+                  { value: 'fiction', label: t('common.book.category.fiction') },
+                  { value: 'thriller', label: t('common.book.category.thriller') },
                 ]}
                 value={value}
               />
@@ -82,9 +100,9 @@ function BookForm({ defaultValues, onSubmit, onClose, submitText, cancelText }: 
       </div>
 
       <footer className={classes.formFooter}>
-        <Button type="submit">{submitText || 'Submit'}</Button>
+        <Button type="submit">{submitText || t('common.actions.add')}</Button>
         <Button variant="secondary" onClick={handleClose}>
-          {cancelText || 'Cancel'}
+          {cancelText || t('common.actions.cancel')}
         </Button>
       </footer>
     </form>
