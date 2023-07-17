@@ -8,9 +8,12 @@ on:
       - "frontend/**"
 
 jobs:
-  publish:
+  deploy:
     name: Deploy
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
     steps:
       - name: 🔨 Checkout
         uses: actions/checkout@v3
@@ -23,9 +26,7 @@ jobs:
           always-auth: true
 
       - name: 🔍 Audit
-        run: |
-          cd frontend
-          npm audit --omit=dev
+        run: npm audit --omit=dev
 
       - name: 📦 Build
         run: |
