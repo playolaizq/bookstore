@@ -13,7 +13,9 @@ export const createBook = (book: Book) => {
 
 export const getBooks = async (): Promise<Book[]> => {
   return new Promise((resolve) => {
-    resolve(getLocalStorageItem<Book[]>('books', []));
+    setTimeout(() => {
+      resolve(getLocalStorageItem<Book[]>('books', []));
+    }, 1000);
   });
 };
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getBooks } from '#/common/services/books';
 import Button from '#/common/components/button/Button';
+import Spinner from '#/common/components/spinner/Spinner';
 import { Book } from '#/common/types/book';
 import BookCard from './components/book-card/BookCard';
 import EmptyState from './components/empty-state/EmptyState';
@@ -49,7 +50,7 @@ function BooksList() {
   }, []);
 
   return (
-    <>
+    <Spinner spinning={loading || innerLoading} size="large">
       {books?.length == 0 ? (
         <EmptyState onClick={() => handleBookDrawer()} />
       ) : (
@@ -87,7 +88,7 @@ function BooksList() {
           }))
         }
       />
-    </>
+    </Spinner>
   );
 }
 
