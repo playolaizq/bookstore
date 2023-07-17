@@ -16,3 +16,4 @@
 
 - [Frontend](./frontend/)
 - [Backend](./backend/)
+- [Architecture](./architecture/)
