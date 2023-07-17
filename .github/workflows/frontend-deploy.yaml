@@ -39,15 +39,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "16.x"
-          cache: "npm"
       - name: 🔍 Audit
         run: npm audit --omit=dev
-      - name: 🔍 Lint
-        run: npm run lint
-      - name: 🔍 Test
-        run: npm run test
-      - name: 📦 Install dependencies
-        run: npm ci
+      - name: 🔍 Code Quality
+        run: |
+          npm ci
+          npm run lint
+          npm run test
       - name: 📦 Build
         run: npm run build
       - name: 🔧 Setup Pages
