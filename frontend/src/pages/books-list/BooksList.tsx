@@ -1,69 +1,91 @@
 import { useEffect, useState } from 'react';
-import { getLocalStorageItem } from '#/common/utils/local-storage';
+import { getBooks } from '#/common/services/books';
 import Button from '#/common/components/button/Button';
+import { Book } from '#/common/types/book';
 import BookCard from './components/book-card/BookCard';
 import EmptyState from './components/empty-state/EmptyState';
-import ManageBookDrawer from './components/manage-book-drawer/ManageBookDrawer';
+import CreateBookDrawer from './components/create-book-drawer/CreateBookDrawer';
+import UpdateBookDrawer from './components/update-book-drawer/UpdateBookDrawer';
 import classes from './BooksList.module.css';
-
-export type Book = {
-  id: string;
-  name: string;
-  author: string;
-  description?: string;
-  category: 'programming' | 'thriller' | 'fiction' | 'mystery';
-};
 
 function BooksList() {
   const [books, setBooks] = useState<Book[]>([]);
-  const [manageBookDrawer, setManageBookDrawer] = useState<{
+  const [createBook, setCreateBookDrawer] = useState({ visible: false });
+  const [updateBook, setUpdateBookDrawer] = useState<{
     visible: boolean;
     defaultValues?: Book | null;
   }>({ visible: false, defaultValues: null });
   const [loading, setLoading] = useState(true);
+  const [innerLoading, setInnerLoading] = useState(false);
 
-  const openManageBook = (bookId?: Book['id']) => {
-    const defaultValues = books.find((book) => book.id == bookId);
-    setManageBookDrawer((prevDrawer) => ({ ...prevDrawer, visible: true, defaultValues }));
+  const retrieveBooks = async () => {
+    try {
+      setInnerLoading(true);
+      const booksList = await getBooks();
+      setBooks(booksList);
+    } catch (error) {
+      console.log('BooksList - getBooks', error);
+    } finally {
+      setLoading(false);
+      setInnerLoading(false);
+    }
   };
 
-  const closeManageBook = () => {
-    setManageBookDrawer((prevDrawer) => ({ ...prevDrawer, visible: false, defaultValues: null }));
+  const handleBookDrawer = (bookId?: Book['id']) => {
+    if (bookId) {
+      const defaultValues = books.find((book) => book.id == bookId);
+      setUpdateBookDrawer((prevDrawer) => ({ ...prevDrawer, visible: true, defaultValues }));
+    } else {
+      setCreateBookDrawer((prevDrawer) => ({ ...prevDrawer, visible: true }));
+    }
   };
 
-  const handleSubmit = (book: Book) => {
-    setBooks((prevBooks) => [...prevBooks, book]);
+  const handleFinish = () => {
+    retrieveBooks();
   };
 
   useEffect(() => {
-    const localBooks = getLocalStorageItem('books', []);
-    setBooks(localBooks);
-    setLoading(false);
+    retrieveBooks();
   }, []);
 
   return (
     <>
       {books?.length == 0 ? (
-        <EmptyState onClick={() => openManageBook()} />
+        <EmptyState onClick={() => handleBookDrawer()} />
       ) : (
         <section>
           <header className={classes.header}>
-            <Button onClick={() => openManageBook()}>Add book</Button>
+            <Button onClick={() => handleBookDrawer()}>Add book</Button>
           </header>
           <ul className={classes.gridList}>
             {books.map((book) => {
               return (
-                <BookCard key={book.id} book={book} onClick={(bookId) => openManageBook(bookId)} />
+                <BookCard
+                  key={book.id}
+                  book={book}
+                  onClick={(bookId) => handleBookDrawer(bookId)}
+                />
               );
             })}
           </ul>
         </section>
       )}
-      <ManageBookDrawer
-        visible={manageBookDrawer.visible}
-        defaultValues={manageBookDrawer.defaultValues}
-        onSubmit={handleSubmit}
-        onClose={closeManageBook}
+      <CreateBookDrawer
+        visible={createBook.visible}
+        onFinish={handleFinish}
+        onClose={() => setCreateBookDrawer((prevDrawer) => ({ ...prevDrawer, visible: false }))}
+      />
+      <UpdateBookDrawer
+        visible={updateBook.visible}
+        defaultValues={updateBook.defaultValues}
+        onFinish={handleFinish}
+        onClose={() =>
+          setUpdateBookDrawer((prevDrawer) => ({
+            ...prevDrawer,
+            visible: false,
+            defaultValues: null,
+          }))
+        }
       />
     </>
   );
