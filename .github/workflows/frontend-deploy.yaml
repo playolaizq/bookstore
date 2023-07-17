@@ -50,6 +50,8 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           path: ./frontend/dist
+      - name: 📥 Download artifact
+        uses: actions/download-artifact@v3
       - name: 🎉 Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
