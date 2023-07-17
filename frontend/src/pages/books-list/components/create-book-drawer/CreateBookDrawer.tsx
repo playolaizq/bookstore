@@ -1,3 +1,4 @@
+import { useI18n } from '#/common/hooks/i18n';
 import { createBook } from '#/common/services/books';
 import Drawer from '#/common/components/drawer/Drawer';
 import { Book } from '#/common/types/book';
@@ -10,6 +11,8 @@ type CreateBookDrawerProps = {
 };
 
 function CreateBookDrawer({ visible, onFinish, onClose }: CreateBookDrawerProps) {
+  const { t } = useI18n();
+
   const handleClose = () => {
     if (onClose) onClose();
   };
@@ -22,7 +25,11 @@ function CreateBookDrawer({ visible, onFinish, onClose }: CreateBookDrawerProps)
 
   return (
     <Drawer open={visible} title="Add book" onClose={handleClose}>
-      <BookForm onSubmit={handleSubmit} onClose={handleClose} submitText="Add" />
+      <BookForm
+        onSubmit={handleSubmit}
+        onClose={handleClose}
+        submitText={t('common.actions.add')}
+      />
     </Drawer>
   );
 }

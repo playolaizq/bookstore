@@ -1,0 +1,9 @@
+{
+  "common": {
+    "actions": {
+      "add": "Añadir",
+      "cancel": "Cancelar",
+      "update": "Actualizar"
+    }
+  }
+}

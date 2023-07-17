@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { useI18n } from '#/common/hooks/i18n';
 import Button from '#/common/components/button/Button';
 import Input from '#/common/components/input/Input';
 import Select from '#/common/components/select/Select';
@@ -16,6 +17,7 @@ type BookFormProps = {
 };
 
 function BookForm({ defaultValues, onSubmit, onClose, submitText, cancelText }: BookFormProps) {
+  const { t } = useI18n();
   const { control, handleSubmit, register, reset } = useForm({
     defaultValues: DEFAULT_VALUES,
   });
@@ -82,9 +84,9 @@ function BookForm({ defaultValues, onSubmit, onClose, submitText, cancelText }: 
       </div>
 
       <footer className={classes.formFooter}>
-        <Button type="submit">{submitText || 'Submit'}</Button>
+        <Button type="submit">{submitText || t('common.actions.add')}</Button>
         <Button variant="secondary" onClick={handleClose}>
-          {cancelText || 'Cancel'}
+          {cancelText || t('common.actions.cancel')}
         </Button>
       </footer>
     </form>

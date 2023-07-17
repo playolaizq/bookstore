@@ -1,8 +1,9 @@
 import { DeleteOutlined } from '@ant-design/icons';
+import { useI18n } from '#/common/hooks/i18n';
 import { updateBook, deleteBook } from '#/common/services/books';
 import Button from '#/common/components/button/Button';
 import Drawer from '#/common/components/drawer/Drawer';
-import Popconfirm from '#/common/components/popconfirm/Popconfirm';
+import PopConfirm from '#/common/components/pop-confirm/PopConfirm';
 import { Book } from '#/common/types/book';
 import BookForm from '../book-form/BookForm';
 
@@ -14,6 +15,8 @@ type UpdateBookDrawerProps = {
 };
 
 function UpdateBookDrawer({ visible, defaultValues, onFinish, onClose }: UpdateBookDrawerProps) {
+  const { t } = useI18n();
+
   const handleClose = () => {
     if (onClose) onClose();
   };
@@ -42,7 +45,7 @@ function UpdateBookDrawer({ visible, defaultValues, onFinish, onClose }: UpdateB
       title="Update book"
       onClose={handleClose}
       extra={
-        <Popconfirm
+        <PopConfirm
           title="Delete the book"
           description="Are you sure to delete this book?"
           onConfirm={handleDelete}
@@ -52,14 +55,14 @@ function UpdateBookDrawer({ visible, defaultValues, onFinish, onClose }: UpdateB
           <Button variant="secondary" shape="circle">
             <DeleteOutlined />
           </Button>
-        </Popconfirm>
+        </PopConfirm>
       }
     >
       <BookForm
         defaultValues={defaultValues}
         onSubmit={handleSubmit}
         onClose={handleClose}
-        submitText="Update"
+        submitText={t('common.actions.update')}
       />
     </Drawer>
   );
