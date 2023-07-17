@@ -23,11 +23,12 @@ jobs:
           always-auth: true
 
       - name: 🔍 Audit
-        run: npm audit --omit=dev
+        run: |
+          cd frontend
+          npm audit --omit=dev
 
       - name: 📦 Build
         run: |
-          cd frontend
           npm ci
           npm run build
 
