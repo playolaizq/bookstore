@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { getBooks } from '#/common/services/books';
 import Button from '#/common/components/button/Button';
+import Skeleton from '#/common/components/skeleton/Skeleton';
 import Spinner from '#/common/components/spinner/Spinner';
 import { Book } from '#/common/types/book';
 import BookCard from './components/book-card/BookCard';
 import EmptyState from './components/empty-state/EmptyState';
 import CreateBookDrawer from './components/create-book-drawer/CreateBookDrawer';
 import UpdateBookDrawer from './components/update-book-drawer/UpdateBookDrawer';
+import { skeletonButtonStyle, skeletonCardStyle } from './config/loading';
 import classes from './BooksList.module.css';
 
 function BooksList() {
@@ -49,8 +51,22 @@ function BooksList() {
     retrieveBooks();
   }, []);
 
-  return (
-    <Spinner spinning={loading || innerLoading} size="large">
+  return loading ? (
+    <section>
+      <header className={classes.header}>
+        <Skeleton.Button style={skeletonButtonStyle} active />
+      </header>
+      <div className={classes.gridList}>
+        <Skeleton.Image style={skeletonCardStyle} active />
+        <Skeleton.Image style={skeletonCardStyle} active />
+        <Skeleton.Image style={skeletonCardStyle} active />
+        <Skeleton.Image style={skeletonCardStyle} active />
+        <Skeleton.Image style={skeletonCardStyle} active />
+        <Skeleton.Image style={skeletonCardStyle} active />
+      </div>
+    </section>
+  ) : (
+    <Spinner spinning={innerLoading} size="large">
       {books?.length == 0 ? (
         <EmptyState onClick={() => handleBookDrawer()} />
       ) : (
