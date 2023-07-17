@@ -53,3 +53,4 @@ npm run test-coverage
 ## Improvements
 
 - Ant Design classes overrides: Avoid using global - Investigate how to properly override Ant Design classes using CSS modules.
+- Style unexpected error page and manage different errors, for example: Not found, Forbidden...
