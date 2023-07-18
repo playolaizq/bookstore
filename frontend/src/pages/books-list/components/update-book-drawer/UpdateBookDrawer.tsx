@@ -1,5 +1,6 @@
 import { DeleteOutlined } from '@ant-design/icons';
 import { useI18n } from '#/common/hooks/i18n';
+import { useMessage } from '#/common/hooks/useMessage';
 import { updateBook, deleteBook } from '#/common/services/books';
 import Button from '#/common/components/button/Button';
 import Drawer from '#/common/components/drawer/Drawer';
@@ -16,6 +17,7 @@ type UpdateBookDrawerProps = {
 
 function UpdateBookDrawer({ visible, defaultValues, onFinish, onClose }: UpdateBookDrawerProps) {
   const { t } = useI18n();
+  const [message, contextHolder] = useMessage();
 
   const handleClose = () => {
     if (onClose) onClose();
@@ -29,8 +31,16 @@ function UpdateBookDrawer({ visible, defaultValues, onFinish, onClose }: UpdateB
 
       onFinish();
       handleClose();
+      message.open({
+        type: 'success',
+        content: 'Book updated successfully.',
+      });
     } catch (err) {
       console.log('err', err);
+      message.open({
+        type: 'error',
+        content: 'Error updating the book.',
+      });
     }
   };
 
@@ -42,7 +52,15 @@ function UpdateBookDrawer({ visible, defaultValues, onFinish, onClose }: UpdateB
 
       onFinish();
       handleClose();
+      message.open({
+        type: 'success',
+        content: 'Book deleted successfully.',
+      });
     } catch (err) {
+      message.open({
+        type: 'error',
+        content: 'Error deleting the book.',
+      });
       console.log('err', err);
     }
   };
@@ -67,6 +85,7 @@ function UpdateBookDrawer({ visible, defaultValues, onFinish, onClose }: UpdateB
         </PopConfirm>
       }
     >
+      {contextHolder}
       <BookForm
         defaultValues={defaultValues}
         onSubmit={handleSubmit}
