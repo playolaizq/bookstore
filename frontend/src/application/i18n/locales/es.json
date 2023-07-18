@@ -10,7 +10,10 @@
     "actions": {
       "add": "Añadir",
       "cancel": "Cancelar",
+      "create": "Crear",
       "no": "No",
+      "sign-in": "Iniciar sesión",
+      "sign-up": "Regístrate",
       "update": "Actualizar",
       "yes": "Sí"
     },

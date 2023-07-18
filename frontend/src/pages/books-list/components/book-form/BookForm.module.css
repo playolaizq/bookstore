@@ -3,15 +3,6 @@
   height: 100%;
 }
 
-.formItem {
-  margin-bottom: 16px;
-}
-
-.formLabel {
-  display: block;
-  margin-bottom: 4px;
-}
-
 .formFooter {
   position: absolute;
   bottom: 0;

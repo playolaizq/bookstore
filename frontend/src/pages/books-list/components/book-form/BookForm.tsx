@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useI18n } from '#/common/hooks/i18n';
 import Button from '#/common/components/button/Button';
+import FormItem from '#/common/components/form-item/FormItem';
 import Input from '#/common/components/input/Input';
 import Select from '#/common/components/select/Select';
 import { Book } from '#/common/types/book';
@@ -43,36 +44,25 @@ function BookForm({ defaultValues, onSubmit, onClose, submitText, cancelText }: 
       className={classes.form}
       onSubmit={(...args) => void handleSubmit(handleFormSubmit)(...args)}
     >
-      <div className={classes.formItem}>
-        <label className={classes.formLabel}>{t('pages.books-list.book-form.labels.name')}</label>
+      <FormItem label={t('pages.books-list.book-form.labels.name')}>
         <Input
           {...register('name', { required: true })}
           placeholder={t('pages.books-list.book-form.placeholders.name')}
         />
-      </div>
-
-      <div className={classes.formItem}>
-        <label className={classes.formLabel}>{t('pages.books-list.book-form.labels.author')}</label>
+      </FormItem>
+      <FormItem label={t('pages.books-list.book-form.labels.author')}>
         <Input
           {...register('author', { required: true })}
           placeholder={t('pages.books-list.book-form.placeholders.author')}
         />
-      </div>
-
-      <div className={classes.formItem}>
-        <label className={classes.formLabel}>
-          {t('pages.books-list.book-form.labels.description')}
-        </label>
+      </FormItem>
+      <FormItem label={t('pages.books-list.book-form.labels.description')}>
         <Input
           {...register('description')}
           placeholder={t('pages.books-list.book-form.placeholders.description')}
         />
-      </div>
-
-      <div className={classes.formItem}>
-        <label className={classes.formLabel}>
-          {t('pages.books-list.book-form.labels.category')}
-        </label>
+      </FormItem>
+      <FormItem label={t('pages.books-list.book-form.labels.category')}>
         <Controller
           control={control}
           name="category"
@@ -97,8 +87,7 @@ function BookForm({ defaultValues, onSubmit, onClose, submitText, cancelText }: 
           }}
           rules={{ required: true }}
         />
-      </div>
-
+      </FormItem>
       <footer className={classes.formFooter}>
         <Button type="submit">{submitText || t('common.actions.add')}</Button>
         <Button variant="secondary" onClick={handleClose}>

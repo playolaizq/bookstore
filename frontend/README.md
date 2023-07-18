@@ -35,13 +35,13 @@ npm run test
 
 // or
 
-npm run test-watch
+npm run test:watch
 ```
 
 ### Coverage
 
 ```bash
-npm run test-coverage
+npm run test:coverage
 ```
 
 ## Troubleshooting

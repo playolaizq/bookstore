@@ -2,4 +2,7 @@
   height: calc(100vh - 48px);
   padding: 24px 224px;
   background-color: var(--bookstore-color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
