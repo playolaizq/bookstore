@@ -10,7 +10,10 @@
     "actions": {
       "add": "Añadir",
       "cancel": "Cancelar",
+      "create": "Crear",
       "no": "No",
+      "sign-in": "Iniciar sesión",
+      "sign-up": "Regístrate",
       "update": "Actualizar",
       "yes": "Sí"
     },
@@ -31,13 +34,13 @@
           "author": "Autor",
           "category": "Categoria",
           "description": "Descripción",
-          "name": "Nombre"
+          "title": "Título"
         },
         "placeholders": {
           "author": "Escribe el autor",
           "category": "Selecciona una categoria",
           "description": "¿De qué trata el libro?",
-          "name": "Escribe el nombre"
+          "title": "Escribe el título"
         }
       },
       "create-book-drawer": {

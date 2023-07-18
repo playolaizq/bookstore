@@ -21,22 +21,30 @@ function UpdateBookDrawer({ visible, defaultValues, onFinish, onClose }: UpdateB
     if (onClose) onClose();
   };
 
-  const handleSubmit = (updatedBook: Book) => {
-    if (defaultValues) {
-      updateBook(defaultValues.id, updatedBook);
-    }
+  const handleSubmit = async (updatedBook: Book) => {
+    try {
+      if (defaultValues) {
+        await updateBook(defaultValues.id, updatedBook);
+      }
 
-    onFinish();
-    handleClose();
+      onFinish();
+      handleClose();
+    } catch (err) {
+      console.log('err', err);
+    }
   };
 
-  const handleDelete = () => {
-    if (defaultValues) {
-      deleteBook(defaultValues.id);
-    }
+  const handleDelete = async () => {
+    try {
+      if (defaultValues) {
+        await deleteBook(defaultValues.id);
+      }
 
-    onFinish();
-    handleClose();
+      onFinish();
+      handleClose();
+    } catch (err) {
+      console.log('err', err);
+    }
   };
 
   return (

@@ -12,7 +12,7 @@ function BookCard({ book, onClick }: BookCardProps) {
 
   return (
     <li className={classes.container} onClick={() => onClick && onClick(book.id)}>
-      <p className={classes.name}>{book.name}</p>
+      <p className={classes.title}>{book.title}</p>
       <p className={classes.author}>{book.author}</p>
       {book.description && <p className={classes.description}>{book.description}</p>}
       <div className={classes.category}>{t(`common.book.category.${book.category}`)}</div>

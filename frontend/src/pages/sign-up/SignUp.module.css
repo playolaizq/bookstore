@@ -1,0 +1,29 @@
+.container {
+  width: 50%;
+}
+
+.title {
+  margin-bottom: 24px;
+}
+
+.button {
+  width: 100%;
+}
+
+.footerNav {
+  margin: 24px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.errorContainer {
+  background: #ff3e3e;
+  color: var(--bookstore-color-white);
+  padding: 8px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.errorText {
+  margin: 0;
+}

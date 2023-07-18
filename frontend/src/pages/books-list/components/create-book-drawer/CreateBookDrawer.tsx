@@ -1,3 +1,4 @@
+import { useUser } from '#/application/state/user';
 import { useI18n } from '#/common/hooks/i18n';
 import { createBook } from '#/common/services/books';
 import Drawer from '#/common/components/drawer/Drawer';
@@ -12,15 +13,20 @@ type CreateBookDrawerProps = {
 
 function CreateBookDrawer({ visible, onFinish, onClose }: CreateBookDrawerProps) {
   const { t } = useI18n();
+  const { user } = useUser();
 
   const handleClose = () => {
     if (onClose) onClose();
   };
 
-  const handleSubmit = (book: Book) => {
-    const newBook = createBook(book);
-    onFinish(newBook);
-    handleClose();
+  const handleSubmit = async (book: Book) => {
+    try {
+      const newBook = await createBook({ ...book, createdBy: user.id });
+      onFinish(newBook);
+      handleClose();
+    } catch (err) {
+      console.log('err', err);
+    }
   };
 
   return (
