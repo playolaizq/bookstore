@@ -7,7 +7,11 @@ const PORT = process.env.PORT || 3333;
 
 const app = express();
 
-const ALLOWED_ORIGINS = ['http://localhost:5173', 'http://127.0.0.1:5173'];
+const ALLOWED_ORIGINS = [
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  'https://playolaizq-bookstore.web.app/',
+];
 const options: cors.CorsOptions = { origin: ALLOWED_ORIGINS };
 app.use(cors(options));
 
