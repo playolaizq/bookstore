@@ -17,6 +17,10 @@
   justify-content: space-between;
 }
 
+.avatar {
+  cursor: pointer;
+}
+
 .titleContainer {
   display: flex;
   align-items: center;

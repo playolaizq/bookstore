@@ -2,6 +2,7 @@ import { createContext, ReactNode, useState } from 'react';
 import { User } from '#/common/types/user';
 
 export type UserContextType = {
+  DEFAULT_USER: User;
   user: User;
   setUser: (user: User) => void;
 };
@@ -14,6 +15,7 @@ const DEFAULT_USER = {
 };
 
 export const UserContext = createContext<UserContextType>({
+  DEFAULT_USER,
   user: DEFAULT_USER,
   setUser: () => {
     /**/
@@ -27,5 +29,7 @@ type UserProviderProps = {
 export const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState<UserContextType['user']>(DEFAULT_USER);
 
-  return <UserContext.Provider value={{ user, setUser }}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider value={{ DEFAULT_USER, user, setUser }}>{children}</UserContext.Provider>
+  );
 };

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Navigate, Outlet, useNavigate } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import i18n from 'i18next';
 import { locale } from '#/application/i18n';
 import { paths } from '#/application/routes/paths';
@@ -11,12 +11,16 @@ import classes from './PrivateRoute.module.css';
 
 function PrivateLayout() {
   const { t } = useI18n();
-  const navigate = useNavigate();
+  const { DEFAULT_USER, setUser } = useUser();
   const [language, setLanguage] = useState(i18n.language);
 
   const handleLocaleChange = (locale: string) => {
     i18n.changeLanguage(locale);
     setLanguage(locale);
+  };
+
+  const handleLogout = () => {
+    setUser(DEFAULT_USER);
   };
 
   return (
@@ -37,7 +41,7 @@ function PrivateLayout() {
               value={language}
             />
             <div>
-              <Avatar size="large" onClick={() => navigate(paths.SIGN_IN)}>
+              <Avatar className={classes.avatar} size="large" onClick={handleLogout}>
                 AA
               </Avatar>
             </div>
