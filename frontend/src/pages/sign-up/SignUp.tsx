@@ -38,7 +38,7 @@ function SignUp() {
   };
 
   return (
-    <div className={classes.container}>
+    <div>
       <h1 className={classes.title}>{t('pages.sign-up.title')}</h1>
       <form onSubmit={(...args) => void handleSubmit(handleFormSubmit)(...args)}>
         {isDuplicated && (

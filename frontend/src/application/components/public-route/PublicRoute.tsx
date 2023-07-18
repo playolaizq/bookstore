@@ -6,7 +6,12 @@ import classes from './PublicRoute.module.css';
 function PublicLayout() {
   return (
     <div className={classes.root}>
-      <Outlet />
+      <section>
+        <img src="/logo.svg" alt="Bookstore" />
+      </section>
+      <section className={classes.content}>
+        <Outlet />
+      </section>
     </div>
   );
 }

@@ -27,7 +27,7 @@ function SignIn() {
   };
 
   return (
-    <div className={classes.container}>
+    <div>
       <h1 className={classes.title}>{t('pages.sign-in.title')}</h1>
       <form onSubmit={(...args) => void handleSubmit(handleFormSubmit)(...args)}>
         <FormItem label="Email">
