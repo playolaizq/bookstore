@@ -12,7 +12,7 @@ cd bookstore/backend
 npm install
 ```
 
-First start your database locally (NOTE: Docker daemon must be running):
+First start your database locally in a container `bookstore` (NOTE: Docker daemon must be running):
 
 ```bash
 npm run db:start
@@ -34,6 +34,29 @@ npm run dev
 
 See http://localhost:3333/
 
+## Code Quality
+
+### Linting
+
+```bash
+npm run lint
+```
+
+### Formatting
+
+```bash
+npm run format
+```
+
+### Test
+
+Run integration tests in a container `bookstore-tests`:
+
+```bash
+npm test
+```
+
 ## Improvements
 
 - Manage unexpected error in `ErrorHandler` middleware.
+- Tests coverage.
