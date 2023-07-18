@@ -50,13 +50,17 @@ npm run format
 
 ### Test
 
-Run integration tests in a container `bookstore-tests`:
+Run integration tests in a container `bookstore-tests`. First start the container and then run the tests:
 
 ```bash
+npm run db:start
+
 npm test
 ```
 
 ## Improvements
 
+- Path aliases.
 - Manage unexpected error in `ErrorHandler` middleware.
 - Tests coverage.
+- Tests specific docker image.

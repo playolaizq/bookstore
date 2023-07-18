@@ -13,8 +13,8 @@
     "db:format": "prisma format",
     "test:db:stop": "docker-compose stop bookstore-tests",
     "test:db:migrate": "env-cmd -f ./.env.test prisma migrate dev --name init",
-    "test:run": "env-cmd -f ./.env.test jest",
-    "test": "npm run db:start && npm run test:db:migrate && npm run test:run && npm run test:db:stop",
+    "test:run": "env-cmd -f ./.env.test jest --runInBand",
+    "test": "npm run test:db:migrate && npm run test:run && npm run test:db:stop",
     "lint": "eslint src --ext ts --report-unused-disable-directives --max-warnings 0",
     "format": "prettier . --write",
     "build": "tsc"
@@ -24,6 +24,7 @@
     "cors": "^2.8.5",
     "env-cmd": "^10.1.0",
     "express": "^4.18.2",
+    "express-validator": "^7.0.1",
     "http-status-codes": "^2.2.0"
   },
   "devDependencies": {

@@ -11,3 +11,7 @@ type CreateUser = {
 export const createUser = (payload: CreateUser) => {
   return request(server).post('/v1/users').send(payload);
 };
+
+export const getUser = (userId: string) => {
+  return request(server).get(`/v1/users/${userId}`);
+};

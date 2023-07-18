@@ -1,21 +1,8 @@
-import { server } from '../../../application';
-import { client } from '../../../application/database/client';
+import { StatusCodes } from 'http-status-codes';
 import { Error } from '../constants/error';
 import { createUser } from './requests';
 
 describe('users logic', () => {
-  afterAll(async () => {
-    // Reset database
-    const deleteUsers = client.user.deleteMany();
-    const deleteBooks = client.book.deleteMany();
-
-    await client.$transaction([deleteUsers, deleteBooks]);
-    await client.$disconnect();
-
-    // Close server
-    server.close();
-  });
-
   it('should create a user', async () => {
     const user = {
       email: 'pol@gmail.com',
@@ -23,8 +10,9 @@ describe('users logic', () => {
       lastName: 'Layola',
     };
 
-    const { body } = await createUser(user);
+    const { body, status } = await createUser(user);
 
+    expect(status).toBe(StatusCodes.CREATED);
     expect(body.email).toBe(user.email);
     expect(body.firstName).toBe(user.firstName);
     expect(body.lastName).toBe(user.lastName);
@@ -32,13 +20,16 @@ describe('users logic', () => {
 
   it('should not create a user if already exists', async () => {
     const user = {
-      email: 'pol@gmail.com',
+      email: 'pol-duplicated@gmail.com',
       firstName: 'Pol',
       lastName: 'Layola',
     };
 
-    const { body } = await createUser(user);
+    const { status: status1 } = await createUser(user);
+    expect(status1).toBe(StatusCodes.CREATED);
 
+    const { body, status: status2 } = await createUser(user);
+    expect(status2).toBe(StatusCodes.CONFLICT);
     expect(body.error).toBe(Error.CONFLICT);
   });
 });
