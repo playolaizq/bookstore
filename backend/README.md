@@ -66,6 +66,7 @@ See `docs` folder with a Postman JSON with an initial set up and examples for al
 
 - Path aliases.
 - Manage unexpected error in `ErrorHandler` middleware.
+- Tests in CI.
 - Tests coverage.
 - Tests specific docker image.
 - Use Prisma v5. Currently using v4 due to incompatibilities with Render.
