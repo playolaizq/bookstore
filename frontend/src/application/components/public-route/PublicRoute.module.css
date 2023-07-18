@@ -1,13 +1,42 @@
 .root {
   height: calc(100vh - 48px);
-  padding: 24px 224px;
+  padding: 24px 64px;
   background-color: var(--bookstore-color-white);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 48px;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.img {
+  width: 100px;
 }
 
 .content {
+  width: 100%;
   flex-grow: 1;
+}
+
+@media (min-width: 480px) {
+  .root {
+    flex-direction: row;
+    gap: 48px;
+  }
+
+  .img {
+    width: 200px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .root {
+    padding: 24px 124px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .img {
+    width: 300px;
+  }
 }

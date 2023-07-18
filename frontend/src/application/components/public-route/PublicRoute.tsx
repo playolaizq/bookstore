@@ -7,7 +7,7 @@ function PublicLayout() {
   return (
     <div className={classes.root}>
       <section>
-        <img src="/logo.svg" alt="Bookstore" />
+        <img className={classes.img} src="/logo.svg" alt="Bookstore" />
       </section>
       <section className={classes.content}>
         <Outlet />
