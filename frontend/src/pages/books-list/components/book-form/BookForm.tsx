@@ -44,10 +44,10 @@ function BookForm({ defaultValues, onSubmit, onClose, submitText, cancelText }: 
       className={classes.form}
       onSubmit={(...args) => void handleSubmit(handleFormSubmit)(...args)}
     >
-      <FormItem label={t('pages.books-list.book-form.labels.name')}>
+      <FormItem label={t('pages.books-list.book-form.labels.title')}>
         <Input
-          {...register('name', { required: true })}
-          placeholder={t('pages.books-list.book-form.placeholders.name')}
+          {...register('title', { required: true })}
+          placeholder={t('pages.books-list.book-form.placeholders.title')}
         />
       </FormItem>
       <FormItem label={t('pages.books-list.book-form.labels.author')}>

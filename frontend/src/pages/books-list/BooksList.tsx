@@ -31,8 +31,10 @@ function BooksList() {
     } catch (error) {
       console.log('BooksList - getBooks', error);
     } finally {
-      setLoading(false);
-      setInnerLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+        setInnerLoading(false);
+      }, 500);
     }
   };
 

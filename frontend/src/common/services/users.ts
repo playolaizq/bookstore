@@ -1,15 +1,16 @@
+import { User } from '#/common/types/user';
 import { instance } from './config';
 
-type User = {
+type CreateUserBody = {
   email: string;
   firstName: string;
   lastName: string;
 };
 
-export const createUser = async (user: User) => {
-  return instance.post('/users', user);
+export const createUser = async (body: CreateUserBody) => {
+  return instance.post<User>('/users', body).then((response) => response.data);
 };
 
 export const getUser = async (userId: string) => {
-  return instance.get(`/users/${userId}`);
+  return instance.get<User>(`/users/${userId}`);
 };

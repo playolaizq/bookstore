@@ -34,13 +34,13 @@
           "author": "Author",
           "category": "Category",
           "description": "Description",
-          "name": "Name"
+          "title": "Title"
         },
         "placeholders": {
           "author": "Type book auhor",
           "category": "Select a category",
           "description": "What's the book about?",
-          "name": "Type book name"
+          "title": "Type book title"
         }
       },
       "create-book-drawer": {

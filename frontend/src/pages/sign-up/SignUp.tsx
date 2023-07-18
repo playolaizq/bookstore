@@ -1,6 +1,9 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { AxiosError, HttpStatusCode } from 'axios';
 import { paths } from '#/application/routes/paths';
+import { useUser } from '#/application/state/user';
 import { useI18n } from '#/common/hooks/i18n';
 import { createUser } from '#/common/services/users';
 import Button from '#/common/components/button/Button';
@@ -11,16 +14,26 @@ import classes from './SignUp.module.css';
 
 function SignUp() {
   const { t } = useI18n();
-  const { handleSubmit, register } = useForm({
-    defaultValues: DEFAULT_VALUES,
-  });
+  const navigate = useNavigate();
+  const { setUser } = useUser();
+  const { handleSubmit, register } = useForm({ defaultValues: DEFAULT_VALUES });
+  const [isDuplicated, setIsDuplicated] = useState(false);
 
   const handleFormSubmit = async (values: SignUpForm) => {
     try {
       const user = await createUser(values);
-      console.log('user', user);
+      setUser(user);
+      navigate(paths.BOOKS_LIST);
     } catch (err) {
-      console.log('err', err);
+      if (err instanceof AxiosError) {
+        if (err.response?.status == HttpStatusCode.Conflict) {
+          setIsDuplicated(true);
+        } else {
+          setIsDuplicated(false);
+        }
+      } else {
+        console.log('err', err);
+      }
     }
   };
 
@@ -28,6 +41,11 @@ function SignUp() {
     <div className={classes.container}>
       <h1 className={classes.title}>{t('pages.sign-up.title')}</h1>
       <form onSubmit={(...args) => void handleSubmit(handleFormSubmit)(...args)}>
+        {isDuplicated && (
+          <div className={classes.errorContainer}>
+            <p className={classes.errorText}>Email is already in use.</p>
+          </div>
+        )}
         <FormItem label="Email">
           <Input {...register('email', { required: true })} placeholder={'Type email'} />
         </FormItem>

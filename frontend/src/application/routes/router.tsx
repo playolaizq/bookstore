@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
-import PrivateLayout from '#/application/components/private-layout/PrivateLayout';
-import PublicLayout from '#/application/components/public-layout/PublicLayout';
+import PrivateRoute from '#/application/components/private-route/PrivateRoute';
+import PublicRoute from '#/application/components/public-route/PublicRoute';
 import BooksList from '#/pages/books-list/BooksList';
 import SignIn from '#/pages/sign-in/SignIn';
 import SignUp from '#/pages/sign-up/SignUp';
@@ -17,7 +17,7 @@ export const router = createBrowserRouter([
         element: <Navigate to={paths.BOOKS_LIST} replace={true} />,
       },
       {
-        element: <PrivateLayout />,
+        element: <PrivateRoute />,
         children: [
           {
             path: paths.BOOKS_LIST,
@@ -26,7 +26,7 @@ export const router = createBrowserRouter([
         ],
       },
       {
-        element: <PublicLayout />,
+        element: <PublicRoute />,
         children: [
           {
             path: paths.SIGN_IN,

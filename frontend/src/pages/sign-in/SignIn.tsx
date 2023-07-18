@@ -1,7 +1,9 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { paths } from '#/application/routes/paths';
+import { useUser } from '#/application/state/user';
 import { useI18n } from '#/common/hooks/i18n';
+import { signIn } from '#/common/services/auth';
 import Button from '#/common/components/button/Button';
 import FormItem from '#/common/components/form-item/FormItem';
 import Input from '#/common/components/input/Input';
@@ -10,13 +12,15 @@ import classes from './SignIn.module.css';
 
 function SignIn() {
   const { t } = useI18n();
-  const { handleSubmit, register } = useForm({
-    defaultValues: DEFAULT_VALUES,
-  });
+  const navigate = useNavigate();
+  const { setUser } = useUser();
+  const { handleSubmit, register } = useForm({ defaultValues: DEFAULT_VALUES });
 
-  const handleFormSubmit = (values: SignInForm) => {
+  const handleFormSubmit = async (values: SignInForm) => {
     try {
-      console.log('values', values);
+      const user = await signIn(values);
+      setUser(user);
+      navigate(paths.BOOKS_LIST);
     } catch (err) {
       console.log('err', err);
     }
