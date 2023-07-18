@@ -2,12 +2,22 @@
 
 ## Getting Started
 
+Clone the repository and install the dependencies:
+
 ```bash
 git clone git@github.com:playolaizq/bookstore.git
 
 cd bookstore/frontend
 
 npm install
+
+npm run dev
+```
+
+Then copy `.env.local.example` into `.env.local` and start the app:
+
+```bash
+cp .env.local.example .env.local
 
 npm run dev
 ```
