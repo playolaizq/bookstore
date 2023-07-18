@@ -12,12 +12,18 @@ cd bookstore/backend
 npm install
 ```
 
-Then start your database locally (NOTE: Docker daemon must be running):
+First start your database locally (NOTE: Docker daemon must be running):
 
 ```bash
 npm run db:start
 
 npm run db:verify
+```
+
+Then run the migrations to set up your database:
+
+```bash
+npm run db:migrate
 ```
 
 Finally you can start your server locally:

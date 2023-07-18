@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import * as BooksService from './books.service';
-import { error } from './constants/error';
+import { Error } from './constants/error';
 
 export const createOne = async (req: Request, res: Response) => {
   const newBook = await BooksService.create(req.body);
@@ -18,7 +18,9 @@ export const findAll = async (req: Request, res: Response) => {
 export const findOne = async (req: Request, res: Response) => {
   const book = await BooksService.findOne(req.params.bookId);
 
-  if (!book) return res.status(StatusCodes.NOT_FOUND).send(error.NOT_FOUND);
+  if (!book) {
+    return res.status(StatusCodes.NOT_FOUND).json({ error: Error.NOT_FOUND });
+  }
 
   return res.status(StatusCodes.OK).json(book);
 };
@@ -27,7 +29,9 @@ export const updateOne = async (req: Request, res: Response) => {
   const { bookId } = req.params;
 
   const book = await BooksService.findOne(bookId);
-  if (!book) return res.status(StatusCodes.NOT_FOUND).send(error.NOT_FOUND);
+  if (!book) {
+    return res.status(StatusCodes.NOT_FOUND).json({ error: Error.NOT_FOUND });
+  }
 
   const updated = await BooksService.updateOne(bookId, req.body);
 
@@ -38,7 +42,9 @@ export const deleteOne = async (req: Request, res: Response) => {
   const { bookId } = req.params;
 
   const book = await BooksService.findOne(bookId);
-  if (!book) return res.status(StatusCodes.NOT_FOUND).send(error.NOT_FOUND);
+  if (!book) {
+    return res.status(StatusCodes.NOT_FOUND).json({ error: Error.NOT_FOUND });
+  }
 
   await BooksService.deleteOne(bookId);
 
