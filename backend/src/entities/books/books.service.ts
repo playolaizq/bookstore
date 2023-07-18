@@ -2,7 +2,9 @@ import type { Book } from '@prisma/client';
 import { client } from '../../application/database/client';
 
 export const create = async (data: Book) => {
-  return client.book.create({ data });
+  const { title, author, description, category, createdBy } = data;
+
+  return client.book.create({ data: { title, author, description, category, createdBy } });
 };
 
 export const findAll = async () => {

@@ -6,7 +6,8 @@ import { Error } from './constants/error';
 
 export const create = async (data: User) => {
   try {
-    const createdUser = await client.user.create({ data });
+    const { email, firstName, lastName } = data;
+    const createdUser = await client.user.create({ data: { email, firstName, lastName } });
     return createdUser;
   } catch (err) {
     if (err instanceof Prisma.PrismaClientKnownRequestError) {
@@ -26,6 +27,14 @@ export const findOne = async (id: string) => {
   return client.user.findUnique({
     where: {
       id,
+    },
+  });
+};
+
+export const findByEmail = async (email: string) => {
+  return client.user.findUnique({
+    where: {
+      email,
     },
   });
 };
