@@ -58,6 +58,10 @@ npm run db:start
 npm test
 ```
 
+## Docs
+
+See `docs` folder with a Postman JSON with an initial set up and examples for all the endpoints.
+
 ## Improvements
 
 - Path aliases.
