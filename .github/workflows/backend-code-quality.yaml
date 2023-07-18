@@ -1,0 +1,33 @@
+name: Backend Code Quality
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "backend/**"
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: backend
+
+jobs:
+  code_quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🔨 Checkout
+        uses: actions/checkout@v3
+      - name: 🔨 Setup
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16.x"
+      - name: 🔍 Audit
+        run: npm audit --omit=dev
+      - name: 🔍 Code Quality
+        run: |
+          npm ci
+          npm run lint
+          npm run test
