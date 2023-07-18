@@ -1,18 +1,16 @@
-import { PrismaClient } from '@prisma/client';
 import type { Book } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { client } from '../../application/database/client';
 
 export const create = async (data: Book) => {
-  return prisma.book.create({ data });
+  return client.book.create({ data });
 };
 
 export const findAll = async () => {
-  return prisma.book.findMany();
+  return client.book.findMany();
 };
 
 export const findOne = async (id: string) => {
-  return prisma.book.findUnique({
+  return client.book.findUnique({
     where: {
       id,
     },
@@ -20,7 +18,7 @@ export const findOne = async (id: string) => {
 };
 
 export const updateOne = async (id: string, data: Book) => {
-  return prisma.book.update({
+  return client.book.update({
     where: {
       id,
     },
@@ -29,7 +27,7 @@ export const updateOne = async (id: string, data: Book) => {
 };
 
 export const deleteOne = async (id: string) => {
-  return prisma.book.delete({
+  return client.book.delete({
     where: {
       id,
     },

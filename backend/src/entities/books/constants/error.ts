@@ -1,3 +1,3 @@
-export const error = {
-  NOT_FOUND: 'Book Not Found.'
+export const Error = {
+  NOT_FOUND: 'Book Not Found.',
 };

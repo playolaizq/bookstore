@@ -1,7 +1,7 @@
 import { Express } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-export const ErrorHandler = (app: Express) => {    
+export const ErrorHandler = (app: Express) => {
   app.use((req, res, next) => {
     try {
       next();

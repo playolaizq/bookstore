@@ -1,3 +1,4 @@
-export const error = {
-  NOT_FOUND: 'User Not Found.'
+export const Error = {
+  CONFLICT: 'User email already exists.',
+  NOT_FOUND: 'User Not Found.',
 };

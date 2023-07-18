@@ -1,15 +1,23 @@
 version: '3.8'
+
 services:
-  postgres:
+  bookstore:
     image: postgres:15
     restart: always
-    environment:
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    volumes:
-      - bookstore:/var/lib/postgresql/data
+    container_name: bookstore
     ports:
       - '5432:5432'
-    container_name: bookstore-container
+    env_file:
+      - .env
+
+  bookstore-tests:
+    image: postgres:15
+    restart: always
+    container_name: bookstore-tests
+    ports:
+      - '5433:5432'
+    env_file:
+      - .env.test
+
 volumes:
   bookstore:
