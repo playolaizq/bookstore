@@ -10,8 +10,8 @@ const app = express();
 const ALLOWED_ORIGINS = [
   'http://localhost:5173',
   'http://127.0.0.1:5173',
-  'https://playolaizq-bookstore.web.app/',
-  'https://playolaizq-bookstore.firebaseapp.com/',
+  'https://playolaizq-bookstore.web.app',
+  'https://playolaizq-bookstore.firebaseapp.com',
 ];
 const options: cors.CorsOptions = { origin: ALLOWED_ORIGINS };
 app.use(cors(options));
