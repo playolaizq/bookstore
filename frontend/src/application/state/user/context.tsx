@@ -1,10 +1,14 @@
-import { createContext, ReactNode, useState } from 'react';
+import { createContext, ReactNode, useState, useEffect } from 'react';
 import { User } from '#/common/types/user';
+import { instance } from '#/common/services/config';
+import { getUser } from '#/common/services/users';
+import { getLocalStorageItem, setLocalStorageItem } from '#/common/utils/local-storage';
 
 export type UserContextType = {
-  DEFAULT_USER: User;
   user: User;
-  setUser: (user: User) => void;
+  updateUser: (user: User) => void;
+  removeUser: () => void;
+  initialLoading: boolean;
 };
 
 const DEFAULT_USER = {
@@ -15,11 +19,14 @@ const DEFAULT_USER = {
 };
 
 export const UserContext = createContext<UserContextType>({
-  DEFAULT_USER,
   user: DEFAULT_USER,
-  setUser: () => {
+  updateUser: () => {
     /**/
   },
+  removeUser: () => {
+    /**/
+  },
+  initialLoading: true,
 });
 
 type UserProviderProps = {
@@ -28,8 +35,34 @@ type UserProviderProps = {
 
 export const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState<UserContextType['user']>(DEFAULT_USER);
+  const [initialLoading, setInitialLoading] = useState(true);
+
+  const updateUser = (user: User) => {
+    instance.defaults.headers['X-Authenticated-Userid'] = user.id;
+    setLocalStorageItem('bookstore-userid', user.id);
+    setUser(user);
+  };
+
+  const removeUser = () => {
+    instance.defaults.headers['X-Authenticated-Userid'] = null;
+    setLocalStorageItem('bookstore-userid', null);
+    setUser(DEFAULT_USER);
+  };
+
+  useEffect(() => {
+    const userId = getLocalStorageItem('bookstore-userid', null);
+    if (userId) {
+      getUser(userId)
+        .then((userData) => updateUser(userData))
+        .finally(() => setInitialLoading(false));
+    } else {
+      setInitialLoading(false);
+    }
+  }, []);
 
   return (
-    <UserContext.Provider value={{ DEFAULT_USER, user, setUser }}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ user, updateUser, removeUser, initialLoading }}>
+      {children}
+    </UserContext.Provider>
   );
 };

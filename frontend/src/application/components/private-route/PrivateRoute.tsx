@@ -5,14 +5,15 @@ import { locale } from '#/application/i18n';
 import { paths } from '#/application/routes/paths';
 import { useUser } from '#/application/state/user';
 import { useI18n } from '#/common/hooks/i18n';
-import { setLocalStorageItem } from '#/common/utils/local-storage';
 import Avatar from '#/common/components/avatar/Avatar';
+import Dropdown from '#/common/components/dropdown/Dropdown';
 import Select from '#/common/components/select/Select';
+import { getUserCaps } from './utils/user';
 import classes from './PrivateRoute.module.css';
 
 function PrivateLayout() {
   const { t } = useI18n();
-  const { DEFAULT_USER, setUser } = useUser();
+  const { user, removeUser } = useUser();
   const [language, setLanguage] = useState(i18n.language);
 
   const handleLocaleChange = (locale: string) => {
@@ -21,8 +22,7 @@ function PrivateLayout() {
   };
 
   const handleLogout = () => {
-    setLocalStorageItem('bookstore-userid', null);
-    setUser(DEFAULT_USER);
+    removeUser();
   };
 
   return (
@@ -43,9 +43,13 @@ function PrivateLayout() {
               value={language}
             />
             <div>
-              <Avatar className={classes.avatar} size="large" onClick={handleLogout}>
-                AA
-              </Avatar>
+              <Dropdown
+                menu={{ items: [{ key: 'logout', label: 'Log out', onClick: handleLogout }] }}
+              >
+                <Avatar className={classes.avatar} size="large">
+                  {getUserCaps(user)}
+                </Avatar>
+              </Dropdown>
             </div>
           </div>
         </header>

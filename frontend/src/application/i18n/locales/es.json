@@ -1,8 +1,8 @@
 {
   "application": {
     "locale": {
-      "en": "Inglés",
-      "es": "Español"
+      "en": "EN",
+      "es": "ES"
     },
     "title": "Bookstore"
   },
