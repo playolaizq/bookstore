@@ -5,6 +5,7 @@ CREATE TYPE "Category" AS ENUM ('programming', 'thriller', 'fiction', 'mystery')
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
     "email" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
     "firstName" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
 

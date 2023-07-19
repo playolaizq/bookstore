@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { AxiosError, HttpStatusCode } from 'axios';
 import { paths } from '#/application/routes/paths';
 import { useUser } from '#/application/state/user';
 import { useI18n } from '#/common/hooks/i18n';
 import { useMessage } from '#/common/hooks/useMessage';
-import { createUser } from '#/common/services/users';
+import { signUp } from '#/common/services/auth';
 import Button from '#/common/components/button/Button';
 import FormItem from '#/common/components/form-item/FormItem';
 import Input from '#/common/components/input/Input';
@@ -17,26 +16,22 @@ import classes from './SignUp.module.css';
 function SignUp() {
   const { t } = useI18n();
   const { setUser } = useUser();
+  const navigate = useNavigate();
   const { handleSubmit, register } = useForm({ defaultValues: DEFAULT_VALUES });
   const [message, contextHolder] = useMessage();
   const [loading, setLoading] = useState(false);
-  const [isDuplicated, setIsDuplicated] = useState(false);
 
   const handleFormSubmit = async (values: SignUpForm) => {
     try {
       setLoading(true);
-      const user = await createUser(values);
-      setUser(user);
-    } catch (err) {
-      if (err instanceof AxiosError) {
-        if (err.response?.status == HttpStatusCode.Conflict) {
-          setIsDuplicated(true);
-        } else {
-          setIsDuplicated(false);
-        }
+      const user = await signUp(values);
+      if (user) {
+        setUser(user);
       } else {
-        console.log('err', err);
+        navigate(paths.SIGN_IN);
       }
+    } catch (err) {
+      console.log('err', err);
       message.open({
         type: 'error',
         content: 'Error signing up.',
@@ -51,11 +46,6 @@ function SignUp() {
       {contextHolder}
       <h1 className={classes.title}>{t('pages.sign-up.title')}</h1>
       <form onSubmit={(...args) => void handleSubmit(handleFormSubmit)(...args)}>
-        {isDuplicated && (
-          <div className={classes.errorContainer}>
-            <p className={classes.errorText}>Email is already in use.</p>
-          </div>
-        )}
         <FormItem label="Email">
           <Input
             {...register('email', { required: true })}
