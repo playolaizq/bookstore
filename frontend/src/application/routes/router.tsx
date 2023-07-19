@@ -1,4 +1,5 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
+import Initializer from '#/application/components/initializer/Initializer';
 import PrivateRoute from '#/application/components/private-route/PrivateRoute';
 import PublicRoute from '#/application/components/public-route/PublicRoute';
 import BooksList from '#/pages/books-list/BooksList';
@@ -10,6 +11,7 @@ import { paths } from './paths';
 export const router = createBrowserRouter([
   {
     path: paths.BASE,
+    element: <Initializer />,
     errorElement: <UnexpectedError />,
     children: [
       {

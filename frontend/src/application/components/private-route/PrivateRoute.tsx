@@ -5,6 +5,7 @@ import { locale } from '#/application/i18n';
 import { paths } from '#/application/routes/paths';
 import { useUser } from '#/application/state/user';
 import { useI18n } from '#/common/hooks/i18n';
+import { setLocalStorageItem } from '#/common/utils/local-storage';
 import Avatar from '#/common/components/avatar/Avatar';
 import Select from '#/common/components/select/Select';
 import classes from './PrivateRoute.module.css';
@@ -20,6 +21,7 @@ function PrivateLayout() {
   };
 
   const handleLogout = () => {
+    setLocalStorageItem('bookstore-userid', null);
     setUser(DEFAULT_USER);
   };
 

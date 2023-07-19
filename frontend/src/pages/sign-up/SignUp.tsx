@@ -6,6 +6,7 @@ import { useUser } from '#/application/state/user';
 import { useI18n } from '#/common/hooks/i18n';
 import { useMessage } from '#/common/hooks/useMessage';
 import { signUp } from '#/common/services/auth';
+import { setLocalStorageItem } from '#/common/utils/local-storage';
 import Button from '#/common/components/button/Button';
 import FormItem from '#/common/components/form-item/FormItem';
 import Input from '#/common/components/input/Input';
@@ -26,6 +27,7 @@ function SignUp() {
       setLoading(true);
       const user = await signUp(values);
       if (user) {
+        setLocalStorageItem('bookstore-userid', user.id);
         setUser(user);
       } else {
         navigate(paths.SIGN_IN);
