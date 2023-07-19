@@ -1,7 +1,8 @@
 import axios from 'axios';
 
-const BASE_URL = `${import.meta.env.VITE_SERVER_BASE_URL}/v1`;
+export const SERVER_BASE_URL = `${import.meta.env.VITE_SERVER_BASE_URL}/v1`;
+export const MEDIA_BASE_URL = import.meta.env.VITE_MEDIA_BASE_URL;
 
 export const instance = axios.create({
-  baseURL: BASE_URL,
+  baseURL: SERVER_BASE_URL,
 });
