@@ -1,0 +1,19 @@
+.container {
+  position: relative;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.visible {
+  opacity: 1;
+  border-radius: 8px;
+}
+
+.placeholder {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  background: var(--bookstore-color-primary-lighten3);
+}

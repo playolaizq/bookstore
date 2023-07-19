@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"pol944li@gmail.com\",\n    \"firstName\": \"Pol\",\n    \"lastName\": \"Layola\",\n    \"password\": \"12345\"\n}",
+							"raw": "{\n    \"email\": \"pol944li@gmail.com\",\n    \"password\": \"12345678\",\n    \"firstName\": \"Pol\",\n    \"lastName\": \"Layola\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -43,7 +43,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"pol944li@gmail.com\"\n}",
+							"raw": "{\n    \"email\": \"pol944li@gmail.com\",\n    \"password\": \"12345678\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -69,61 +69,6 @@
 			"name": "users",
 			"item": [
 				{
-					"name": "create user",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"email\": \"pol944li@gmail.com\",\n    \"firstName\": \"Pol\",\n    \"lastName\": \"Layola\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{BASE_URL}}/users",
-							"host": [
-								"{{BASE_URL}}"
-							],
-							"path": [
-								"users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get users",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"email\": \"pol944li@gmail.com\",\n    \"firstName\": \"Pol\",\n    \"lastName\": \"Layola\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{BASE_URL}}/users",
-							"host": [
-								"{{BASE_URL}}"
-							],
-							"path": [
-								"users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "get user",
 					"request": {
 						"method": "GET",
@@ -140,7 +85,7 @@
 							"variable": [
 								{
 									"key": "userId",
-									"value": ""
+									"value": "f0fe7be9-0178-4607-ae37-1fb59847631e"
 								}
 							]
 						}
@@ -156,10 +101,16 @@
 					"name": "create book",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "x-authenticated-userid",
+								"value": "f0fe7be9-0178-4607-ae37-1fb59847631e",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"Node.js in Action\",\n    \"author\": \"Young, Meck and Cantelon\",\n    \"description\": \"Programming in Node.js\",\n    \"category\": \"programming\",\n    \"createdBy\": \"590b2e54-541e-4283-b7a0-1020899555d6\"\n}",
+							"raw": "{\n    \"title\": \"Node.js in Action\",\n    \"author\": \"Young, Meck and Cantelon\",\n    \"description\": \"Programming in Node.js\",\n    \"category\": \"mystery\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -182,7 +133,13 @@
 					"name": "get books",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "x-authenticated-userid",
+								"value": "f0fe7be9-0178-4607-ae37-1fb59847631e",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{BASE_URL}}/books",
 							"host": [
