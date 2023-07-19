@@ -7,8 +7,12 @@ export const create = async (data: Book) => {
   return client.book.create({ data: { title, author, description, category, createdBy } });
 };
 
-export const findAll = async () => {
-  return client.book.findMany();
+export const findAll = async ({ createdBy }: { createdBy?: string }) => {
+  return client.book.findMany({
+    where: {
+      createdBy,
+    },
+  });
 };
 
 export const findOne = async (id: string) => {

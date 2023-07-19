@@ -38,13 +38,13 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   const [initialLoading, setInitialLoading] = useState(true);
 
   const updateUser = (user: User) => {
-    instance.defaults.headers['X-Authenticated-Userid'] = user.id;
+    instance.defaults.headers['x-authenticated-userid'] = user.id;
     setLocalStorageItem('bookstore-userid', user.id);
     setUser(user);
   };
 
   const removeUser = () => {
-    instance.defaults.headers['X-Authenticated-Userid'] = null;
+    instance.defaults.headers['x-authenticated-userid'] = null;
     setLocalStorageItem('bookstore-userid', null);
     setUser(DEFAULT_USER);
   };
