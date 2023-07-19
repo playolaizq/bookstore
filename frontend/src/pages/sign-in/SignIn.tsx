@@ -16,7 +16,11 @@ import classes from './SignIn.module.css';
 function SignIn() {
   const { t } = useI18n();
   const { updateUser } = useUser();
-  const { handleSubmit, register } = useForm({ defaultValues: DEFAULT_VALUES });
+  const {
+    formState: { errors },
+    handleSubmit,
+    register,
+  } = useForm({ defaultValues: DEFAULT_VALUES });
   const [message, contextHolder] = useMessage();
   const [loading, setLoading] = useState(false);
 
@@ -41,16 +45,28 @@ function SignIn() {
       {contextHolder}
       <h1 className={classes.title}>{t('pages.sign-in.title')}</h1>
       <form onSubmit={(...args) => void handleSubmit(handleFormSubmit)(...args)}>
-        <FormItem label="Email">
+        <FormItem label="Email" error={errors['email']}>
           <Input
-            {...register('email', { required: true })}
+            {...register('email', {
+              required: 'Email is required',
+              pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: 'Email format is invalid',
+              },
+            })}
             placeholder={'Type email'}
             type="email"
           />
         </FormItem>
-        <FormItem label="Password">
+        <FormItem label="Password" error={errors['password']}>
           <Input
-            {...register('password', { required: true })}
+            {...register('password', {
+              required: 'Password is required',
+              minLength: {
+                value: 8,
+                message: 'Password length must be at least 8',
+              },
+            })}
             placeholder={'Type password'}
             type="password"
           />

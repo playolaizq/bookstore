@@ -17,7 +17,11 @@ function SignUp() {
   const { t } = useI18n();
   const { updateUser } = useUser();
   const navigate = useNavigate();
-  const { handleSubmit, register } = useForm({ defaultValues: DEFAULT_VALUES });
+  const {
+    formState: { errors },
+    handleSubmit,
+    register,
+  } = useForm({ defaultValues: DEFAULT_VALUES });
   const [message, contextHolder] = useMessage();
   const [loading, setLoading] = useState(false);
 
@@ -46,22 +50,40 @@ function SignUp() {
       {contextHolder}
       <h1 className={classes.title}>{t('pages.sign-up.title')}</h1>
       <form onSubmit={(...args) => void handleSubmit(handleFormSubmit)(...args)}>
-        <FormItem label="Email">
+        <FormItem label="Email" error={errors['email']}>
           <Input
-            {...register('email', { required: true })}
+            {...register('email', {
+              required: 'Email is required',
+              pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: 'Email format is invalid',
+              },
+            })}
             placeholder={'Type email'}
             type="email"
           />
         </FormItem>
-        <FormItem label="First name">
-          <Input {...register('firstName', { required: true })} placeholder={'Type first name'} />
-        </FormItem>
-        <FormItem label="Last name">
-          <Input {...register('lastName', { required: true })} placeholder={'Type last name'} />
-        </FormItem>
-        <FormItem label="Password">
+        <FormItem label="First name" error={errors['firstName']}>
           <Input
-            {...register('password', { required: true })}
+            {...register('firstName', { required: 'First name is required' })}
+            placeholder={'Type first name'}
+          />
+        </FormItem>
+        <FormItem label="Last name" error={errors['lastName']}>
+          <Input
+            {...register('lastName', { required: 'Last name is required' })}
+            placeholder={'Type last name'}
+          />
+        </FormItem>
+        <FormItem label="Password" error={errors['password']}>
+          <Input
+            {...register('password', {
+              required: 'Password is required',
+              minLength: {
+                value: 8,
+                message: 'Password length must be at least 8',
+              },
+            })}
             placeholder={'Type password'}
             type="password"
           />
