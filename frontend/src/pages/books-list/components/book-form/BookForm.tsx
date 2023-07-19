@@ -19,7 +19,13 @@ type BookFormProps = {
 
 function BookForm({ defaultValues, onSubmit, onClose, submitText, cancelText }: BookFormProps) {
   const { t } = useI18n();
-  const { control, handleSubmit, register, reset } = useForm({
+  const {
+    control,
+    formState: { errors },
+    handleSubmit,
+    register,
+    reset,
+  } = useForm({
     defaultValues: DEFAULT_VALUES,
   });
 
@@ -44,15 +50,15 @@ function BookForm({ defaultValues, onSubmit, onClose, submitText, cancelText }: 
       className={classes.form}
       onSubmit={(...args) => void handleSubmit(handleFormSubmit)(...args)}
     >
-      <FormItem label={t('pages.books-list.book-form.labels.title')}>
+      <FormItem label={t('pages.books-list.book-form.labels.title')} error={errors['title']}>
         <Input
-          {...register('title', { required: true })}
+          {...register('title', { required: 'Title is required' })}
           placeholder={t('pages.books-list.book-form.placeholders.title')}
         />
       </FormItem>
-      <FormItem label={t('pages.books-list.book-form.labels.author')}>
+      <FormItem label={t('pages.books-list.book-form.labels.author')} error={errors['author']}>
         <Input
-          {...register('author', { required: true })}
+          {...register('author', { required: 'Author is required' })}
           placeholder={t('pages.books-list.book-form.placeholders.author')}
         />
       </FormItem>
@@ -62,7 +68,7 @@ function BookForm({ defaultValues, onSubmit, onClose, submitText, cancelText }: 
           placeholder={t('pages.books-list.book-form.placeholders.description')}
         />
       </FormItem>
-      <FormItem label={t('pages.books-list.book-form.labels.category')}>
+      <FormItem label={t('pages.books-list.book-form.labels.category')} error={errors['category']}>
         <Controller
           control={control}
           name="category"
@@ -85,7 +91,7 @@ function BookForm({ defaultValues, onSubmit, onClose, submitText, cancelText }: 
               />
             );
           }}
-          rules={{ required: true }}
+          rules={{ required: 'Category is required' }}
         />
       </FormItem>
       <footer className={classes.formFooter}>
