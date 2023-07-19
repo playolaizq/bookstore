@@ -23,7 +23,7 @@ npm run db:verify
 Then run the migrations to set up your database:
 
 ```bash
-npm run db:migrate
+npm run db:migrate:dev
 ```
 
 Finally you can start your server locally:
