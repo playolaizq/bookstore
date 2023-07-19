@@ -9,6 +9,12 @@ export const create = async (data: User) => {
     const { email, password, firstName, lastName } = data;
     const createdUser = await client.user.create({
       data: { email, password, firstName, lastName },
+      select: {
+        id: true,
+        email: true,
+        firstName: true,
+        lastName: true,
+      },
     });
     return createdUser;
   } catch (err) {
@@ -25,6 +31,12 @@ export const findOne = async (id: string) => {
   return client.user.findUnique({
     where: {
       id,
+    },
+    select: {
+      id: true,
+      email: true,
+      firstName: true,
+      lastName: true,
     },
   });
 };
