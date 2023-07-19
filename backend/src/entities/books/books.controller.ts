@@ -1,21 +1,22 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
+import { ExtendedRequest } from '../../application/middlewares/user-data';
 import * as BooksService from './books.service';
 import { Error } from './constants/error';
 
-export const createOne = async (req: Request, res: Response) => {
-  const newBook = await BooksService.create(req.body);
+export const createOne = async (req: ExtendedRequest, res: Response) => {
+  const newBook = await BooksService.create({ ...req.body, createdBy: req.userId });
 
   return res.status(StatusCodes.CREATED).json(newBook);
 };
 
-export const findAll = async (req: Request, res: Response) => {
-  const books = await BooksService.findAll();
+export const findAll = async (req: ExtendedRequest, res: Response) => {
+  const books = await BooksService.findAll({ createdBy: req.userId });
 
   return res.status(StatusCodes.OK).json(books);
 };
 
-export const findOne = async (req: Request, res: Response) => {
+export const findOne = async (req: ExtendedRequest, res: Response) => {
   const book = await BooksService.findOne(req.params.bookId);
 
   if (!book) {
@@ -25,7 +26,7 @@ export const findOne = async (req: Request, res: Response) => {
   return res.status(StatusCodes.OK).json(book);
 };
 
-export const updateOne = async (req: Request, res: Response) => {
+export const updateOne = async (req: ExtendedRequest, res: Response) => {
   const { bookId } = req.params;
 
   const book = await BooksService.findOne(bookId);
@@ -38,7 +39,7 @@ export const updateOne = async (req: Request, res: Response) => {
   return res.status(StatusCodes.OK).json(updated);
 };
 
-export const deleteOne = async (req: Request, res: Response) => {
+export const deleteOne = async (req: ExtendedRequest, res: Response) => {
   const { bookId } = req.params;
 
   const book = await BooksService.findOne(bookId);
