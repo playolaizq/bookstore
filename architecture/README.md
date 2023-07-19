@@ -50,3 +50,5 @@ terraform apply
 - [Terraform S3 bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket)
 - [Terraform S3 bucket website configuration](https://registry.terraform.io/providers/hashicorp/aws/4.8.0/docs/resources/s3_bucket_website_configuration)
 - [AWS configure credentials - GitHub Action](https://github.com/aws-actions/configure-aws-credentials)
+- [AWS IAM OIDC identity provider](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html)
+- [GitHub assume role configuration](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services)
