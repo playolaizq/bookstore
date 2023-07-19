@@ -6,8 +6,10 @@ import { Error } from './constants/error';
 
 export const create = async (data: User) => {
   try {
-    const { email, firstName, lastName } = data;
-    const createdUser = await client.user.create({ data: { email, firstName, lastName } });
+    const { email, password, firstName, lastName } = data;
+    const createdUser = await client.user.create({
+      data: { email, password, firstName, lastName },
+    });
     return createdUser;
   } catch (err) {
     if (err instanceof Prisma.PrismaClientKnownRequestError) {
@@ -17,10 +19,6 @@ export const create = async (data: User) => {
     }
     throw err;
   }
-};
-
-export const findAll = async () => {
-  return client.user.findMany();
 };
 
 export const findOne = async (id: string) => {
