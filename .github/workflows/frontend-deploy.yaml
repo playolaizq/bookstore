@@ -33,5 +33,10 @@ jobs:
           npm run test
       - name: 📦 Build
         run: npm run build
+      - name: 📦 Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: "${{ secrets.AWS_S3_ROLE }}"
+          aws-region: "${{ secrets.AWS_REGION }}"
       - name: 🎉 Deploy to AWS S3
-        run: echo "Deploy to AWS S3"
+        run: aws s3 sync "./build" "s3://playolaizq-bookstore-bucket"
