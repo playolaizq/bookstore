@@ -12,6 +12,7 @@ const ALLOWED_ORIGINS = [
   'http://127.0.0.1:5173',
   'https://playolaizq-bookstore.web.app',
   'https://playolaizq-bookstore.firebaseapp.com',
+  'http://playolaizq-bookstore-bucket.s3-website.eu-central-1.amazonaws.com',
 ];
 const options: cors.CorsOptions = { origin: ALLOWED_ORIGINS };
 app.use(cors(options));
